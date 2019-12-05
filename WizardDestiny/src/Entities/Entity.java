@@ -20,6 +20,7 @@ public abstract class Entity {
         JUMPING,
         FALLING,
         ATTACKING,
+        S_ATTACKING,
         DEAD
     };
     
