@@ -14,7 +14,7 @@ public abstract class Entity {
     /**
      * Enumeration containing all possible states for an entity
      */
-    public enum States {
+    public static enum States {
         IDLE,
         WALKING,
         JUMPING,
