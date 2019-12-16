@@ -6,7 +6,9 @@
 package Level;
 
 import Entities.DynamicEntities.Attacks.Attack;
+import Entities.DynamicEntities.Enemy;
 import Entities.DynamicEntities.MainCharacter;
+import Entities.DynamicEntities.MovThread;
 import Entities.Entity;
 import Sprite.MainCharaterSprite;
 import java.awt.Graphics;
@@ -36,6 +38,9 @@ public abstract class Level extends JPanel{
     
     /*Instance of the Class Main Character.*/
     protected MainCharacter mc;
+    
+    /*Instance of the first enemies:wolfs*/
+    protected Enemy enemywolf;
     
     /*ArrayList containing all entities of the current Level.*/
     protected ArrayList entities;
@@ -80,7 +85,9 @@ public abstract class Level extends JPanel{
         setMap();
         this.mcs = new MainCharaterSprite();
         this.sprite = mcs.getSprites();
-        
+        this.enemywolf = new Enemy(450,370,"/Resources/wolf.png");
+        Thread t1 = new Thread(new MovThread(enemywolf));
+        t1.start();
         /**
          * Only for test purpose. 
          * To be deleted once a builder is defined.
@@ -203,6 +210,7 @@ public abstract class Level extends JPanel{
         }
         scrolling();
         g2d.drawImage(img[0],mc.getPosX(),mc.getPosY(),mc.getWidth(),mc.getHeight(),null);
+        g2d.drawImage(enemywolf.getS_image(),enemywolf.getPosX(),enemywolf.getPosY(),enemywolf.getWidth(),enemywolf.getHeight(),null);
         drawAttacks(g2d);
     }
     
