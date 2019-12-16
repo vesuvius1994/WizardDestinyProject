@@ -5,37 +5,58 @@
  */
 package Commands;
 
-import javax.swing.*;
 import java.awt.event.*;
 import javax.swing.Timer;
 
 import Entities.DynamicEntities.*;
 import Entities.Entity;
+import Level.Level;
+
+
 /**
+ * This Class manages controls input given by the Player.
+ * It handles all events related to pressed keys.
  *
  * @author letga
  */
 public class CommandsListener implements ActionListener{
     
     private MainCharacter mc;
-    private JPanel level;
+    private Level level;
+    
+    /*It is used to manage the ActionListener Thread.*/
     private Timer timer;
     
-    CommandsListener(MainCharacter mc, JPanel level){
-        this.mc = mc;
+    /*Variables used to manage Main Character jump action.*/
+    private long jumpingTime;
+    private boolean isJumping;
+    
+    /**
+     * Constructor of the Class.It takes the Main Character and Level objects as input.
+     * It instantiates EventListener and Timer objects.
+     * @param level
+     */
+    public CommandsListener(Level level){
         this.level = level;
+        this.mc = this.level.getMainCharacter();
         this.level.addKeyListener(new EventKeyHandler());
-        
+        this.level.setFocusable(true);
+        this.jumpingTime = 400;
+        this.isJumping = false;
+    }
+    
+    /**
+     * It instantiates a Timer object.
+    */
+    public void startListener(){
         this.timer = new Timer(10, this);
         this.timer.start();
     }
-
-    /*Quando l'utente preme un tasto,
-    *questo metodo si occupa di invocare
-    *il metodo move dell'oggetto MainCharacter.
-    *Inoltre, aggiorna il JPanel attuale
-    *invocando il metodo repaint
-    *dell'oggetto level.*/
+    
+    /**
+     * It updates the Main Character position
+     * and Level Panel.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         this.mc.movement();
@@ -43,34 +64,27 @@ public class CommandsListener implements ActionListener{
         //refresh tile of Main Character
     }
     
-    /*Gestisce il tipo di azione in base
-    *al tasto che è stato premuto dall'utente.
-    *Questa funzione suppone che move incrementa
-    *l'ascissa e l'ordinata in base ai loro 
-    *rispettivi delta.
-    *Inoltre, gestisce gli stati in base all'azione da compiere.
-    **/
+    /**
+     * It handles all inputs given by the Player.
+     */
     private class EventKeyHandler implements KeyListener{
         
         @Override
         public void keyPressed(KeyEvent e){
             int key = e.getKeyCode();
             
-            if(key == mc.getMoveForwardKey() && level.canMoveForward()){
-                mc.setDx(1);
+            if(key == mc.getCommand().getDx()){
+                mc.setDx(2);
                 mc.setState(Entity.States.WALKING);
-            } else if(key == mc.getMoveBackwardKey() 
-                    && level.canMoveBackward()){
-                mc.setDx(-1);
+            } else if(key == mc.getCommand().getSx()){
+                mc.setDx(-2);
                 mc.setState(Entity.States.WALKING);
-            } else if(key == mc.getJumpKey() && mc.getState() != Entity.States.JUMPING 
-                    && level.canJump()){
-                mc.setDy(2);
-                mc.setState(Entity.States.JUMPING);
-            } else if(key == mc.getBasicAttackKey()){
+            } else if(key == mc.getCommand().getJump() && !isJumping){
+                new Thread(new JumpManagementThread()).start();
+            } else if(key == mc.getCommand().getAttackB()){
                 mc.attack();
                 mc.setState(Entity.States.ATTACKING);
-            } else if(key == mc.getSpecialAttackKey() && mc.getEnergy() > 0){
+            } else if(key == mc.getCommand().getAttackS() && mc.getEnergy() > 0){
                 mc.specialAttack();
                 mc.decreaseEnergy();
                 mc.setState(Entity.States.S_ATTACKING);
@@ -88,13 +102,34 @@ public class CommandsListener implements ActionListener{
         public void keyReleased(KeyEvent e) {
             int key = e.getKeyCode();
             
-            if(key == mc.getMoveForwardKey() 
-                    || key == mc.getMoveBackwardKey()){
+            if(key == mc.getCommand().getDx()
+                    || key == mc.getCommand().getSx()){
                 mc.setDx(0);
-            } else if(key == mc.getJumpKey()){
-                mc.setDy(0);
+                mc.setState(Entity.States.IDLE);
             }
-            mc.setState(Entity.States.IDLE);
         }
+    }
+    
+    /**
+     * This Thread manages the Main Character Jump Action.
+     */
+    private class JumpManagementThread implements Runnable{
+
+        @Override
+        public void run() {
+            try{
+                isJumping = true;
+                mc.setDy(-3);
+                Thread.sleep(jumpingTime);
+                mc.setDy(3);
+                Thread.sleep(jumpingTime);
+                //mc.setDy(0);
+                isJumping = false;
+                
+            }catch(InterruptedException e){
+                System.exit(0);
+            }
+        }
+        
     }
 }

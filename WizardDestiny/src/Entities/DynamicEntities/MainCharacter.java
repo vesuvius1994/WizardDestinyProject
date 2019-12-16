@@ -5,7 +5,6 @@
  */
 package Entities.DynamicEntities;
 
-import Entities.Entity;
 import Commands.*;
 
 /**
@@ -20,32 +19,16 @@ public class MainCharacter extends DynamicEntity{
     public MainCharacter(int posX, int posY) {
         super(posX, posY);
         
-        this.command = new SourceCommand();
+        this.command = new DefaultCommand();
         //invocare i metodi per acquisire file dei comandi
-        this.setHeight(30);
-        this.setWidth(30);
-    }
-    
-    public int getMoveForwardKey(){
-        return this.command.getDx();
-    }
-    
-    public int getMoveBackwardKey(){
-        return this.command.getSx();
-    }
-    
-    public int getJumpKey(){
-        return this.command.getJump();
-    }
-    
-    public int getBasicAttackKey(){
-        return this.command.getAttackB();
-    }
-    
-    public int getSpecialAttackKey(){
-        return this.command.getAttackS();
+        this.setHeight(45);
+        this.setWidth(45);
     }
 
+    public SourceCommand getCommand() {
+        return command;
+    }
+    
     public void specialAttack(){
         System.out.print("\n************Special Attack***********\n");
     }

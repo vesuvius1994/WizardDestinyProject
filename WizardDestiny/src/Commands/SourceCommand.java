@@ -16,23 +16,23 @@ public class SourceCommand {
     private int jump;
     private int dx;
     private int sx;
-    private int attack_b;
-    private int attack_s;
+    private int attackB;
+    private int attackS;
 
     public int getAttackB() {
-        return attack_b;
+        return attackB;
     }
 
     public void setAttackB(int attack_b) {
-        this.attack_b = attack_b;
+        this.attackB = attack_b;
     }
 
     public int getAttackS() {
-        return attack_s;
+        return attackS;
     }
 
     public void setAttackS(int attack_s) {
-        this.attack_s = attack_s;
+        this.attackS = attack_s;
     }
     
     

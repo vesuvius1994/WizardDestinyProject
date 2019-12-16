@@ -14,8 +14,8 @@ import Entities.Entity;
 public abstract class DynamicEntity extends Entity{
 
     // acceleration
-    private int dx;
-    private int dy;
+    private int dx = 0;
+    private int dy = 3;
     
     public DynamicEntity(int posX, int posY) {
         super(posX, posY);
