@@ -1,2 +1,9 @@
 /WizardDestiny/build/
 /WizardDestiny/dist/
+*.class
+*.class
+WizardDestiny/build/classes/Commands/CommandsListener.class
+WizardDestiny/build/classes/Commands/CommandsListener$EventKeyHandler.class
+*.class
+WizardDestiny/build/test/classes/Entities/DynamicEntities/MainCharacterTest.class
+WizardDestiny/build/test/classes/Commands/CommandsListenerTest.class
