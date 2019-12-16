@@ -25,8 +25,9 @@ public class Main {
         cmd.startListener();
         
         JFrame testFrame = new JFrame("Demo Level");
-        testFrame.setSize(630, 518);
+        testFrame.setSize(630, 508);
 	testFrame.setVisible(true);
+        testFrame.setResizable(false);
 	testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         testFrame.add(demoLevel);
     }

@@ -33,7 +33,7 @@ public class DemoLevel extends Level{
     protected void scrolling(){
         if(mc.getPosX() > 240){
             dx -= 2;
-            bg.update();
+            //bg.update();
             mc.setPosX(240);
         }
     }

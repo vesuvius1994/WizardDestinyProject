@@ -20,6 +20,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Scanner;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
@@ -56,6 +57,14 @@ public abstract class Level extends JPanel{
     protected int numCols;
     protected int numRows;
     protected Background bg;
+    protected int numRowsMatrix;
+    protected int numColsMatrix;
+    
+    /*Attributes to read more caracter from matrix*/
+    protected Scanner scan;
+    protected String str;
+
+    
     
     /*Strings containing the pathname of files ".map"
     *and ".png", respectively*/
@@ -81,6 +90,12 @@ public abstract class Level extends JPanel{
     public Level(){
         this.setPaths();
         
+        /**
+         * Only for test purpose. 
+         * To be deleted once a builder is defined.
+        */
+        this.mc = new MainCharacter(10, 10);
+        
         createBackground();
         setMap();
         this.mcs = new MainCharaterSprite();
@@ -88,11 +103,7 @@ public abstract class Level extends JPanel{
         this.enemywolf = new Enemy(450,370,"/Resources/wolf.png");
         Thread t1 = new Thread(new MovThread(enemywolf));
         t1.start();
-        /**
-         * Only for test purpose. 
-         * To be deleted once a builder is defined.
-        */
-        this.mc = new MainCharacter(10, 10);
+        
     }
     
     /**
@@ -114,7 +125,7 @@ public abstract class Level extends JPanel{
     /*It instantiates an object "Background" by providing
     *the pathname of the ".png" file related to the level.*/
     protected void createBackground(){
-        bg = new Background(this.backgroundPath);
+        bg = new Background(this.backgroundPath, mc);
     }
     
     /*It takes the pathname of a file ".map" as input
@@ -123,22 +134,24 @@ public abstract class Level extends JPanel{
     *and their tiles.*/
     protected void loadMap(String s) {
 
-        int temp;
-        
+        int temp = 0;
+
         try {
             InputStream in = getClass().getResourceAsStream(s);
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
 
-            map = new int[16][26];
+            numRowsMatrix = Integer.parseInt(br.readLine());
+            numColsMatrix = Integer.parseInt(br.readLine());
+            map = new int[numRowsMatrix][numColsMatrix];
 
-            for (int i = 0; i < 16; i++) {
-                for (int j = 0; j < 26; j++) {
-                    temp = br.read() - 48;
-                    if (!(temp < 0)) {
-                        map[i][j] = temp;
-                    } else {
-                        j--;
-                    }
+            for (int i = 0; i < numRowsMatrix; i++) {
+                str = br.readLine();
+                scan = new Scanner(str);
+                for (int j = 0; j < numColsMatrix; j++) {
+                    temp = scan.nextInt();
+                        if(temp!=-1){
+                            map[i][j] = temp;
+                        }
                 }
             }
         } catch (IOException e) {
@@ -175,8 +188,8 @@ public abstract class Level extends JPanel{
     *and "tiles".*/
     protected void drawMap(Graphics2D g) {
 
-        for (int i = 0; i < 16; i++) {
-            for (int j = 0; j < 26; j++) {
+        for (int i = 0; i < numRowsMatrix; i++) {
+            for (int j = 0; j < numColsMatrix; j++) {
                 int rc = map[i][j];
                 int r = rc / 5;
                 int c = rc % 5;
@@ -225,7 +238,7 @@ public abstract class Level extends JPanel{
     protected void scrolling(){
         if(mc.getPosX() > HALF_PANEL){
             dx -= 2;
-            bg.update();
+            //bg.update();
             this.updateEntitiesPosition();
             mc.setPosX(HALF_PANEL);
         } else if(mc.getPosX() < 0){
