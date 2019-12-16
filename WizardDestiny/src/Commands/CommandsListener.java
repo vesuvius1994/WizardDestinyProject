@@ -9,8 +9,10 @@ import java.awt.event.*;
 import javax.swing.Timer;
 
 import Entities.DynamicEntities.*;
+import Entities.DynamicEntities.Attacks.Attack;
 import Entities.Entity;
 import Level.Level;
+import java.util.List;
 
 
 /**
@@ -60,8 +62,22 @@ public class CommandsListener implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         this.mc.movement();
+        updateAttacks();
         this.level.repaint();
         //refresh tile of Main Character
+    }
+    
+    /**
+     * Update Main Character attacks
+     */
+    private void updateAttacks(){
+        List<Attack> Attacks = mc.getAttacks();
+        for(Attack a : Attacks){
+            if(a.isVisible())
+                a.movement();
+            else
+                Attacks.remove(a);
+        }
     }
     
     /**

@@ -6,6 +6,9 @@
 package Entities.DynamicEntities;
 
 import Commands.*;
+import Entities.DynamicEntities.Attacks.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -15,10 +18,12 @@ public class MainCharacter extends DynamicEntity{
     
     // Character commands
     private SourceCommand command;
-    
+    private List<Attack> Attacks;
+
     public MainCharacter(int posX, int posY) {
         super(posX, posY);
         
+        this.Attacks = new ArrayList();
         this.command = new DefaultCommand();
         //invocare i metodi per acquisire file dei comandi
         this.setHeight(45);
@@ -30,7 +35,7 @@ public class MainCharacter extends DynamicEntity{
     }
     
     public void specialAttack(){
-        System.out.print("\n************Special Attack***********\n");
+        this.Attacks.add(new SpecialAttack(this.getPosX(), this.getPosY())); 
     }
     
     /****DA IMPLEMENTARE***/
@@ -44,9 +49,13 @@ public class MainCharacter extends DynamicEntity{
     public void decreaseEnergy(){
         System.out.print("\n----Energy decreased----\n");
     }
+
+    public List<Attack> getAttacks() {
+        return Attacks;
+    }
     
     @Override
     public void attack() {
-        System.out.print("\n-----------Basic attack------------\n");
+        this.Attacks.add(new BasicAttack(this.getPosX(), this.getPosY())); 
     }
 }

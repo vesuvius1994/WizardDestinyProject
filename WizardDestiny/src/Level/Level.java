@@ -5,6 +5,7 @@
  */
 package Level;
 
+import Entities.DynamicEntities.Attacks.Attack;
 import Entities.DynamicEntities.MainCharacter;
 import Entities.Entity;
 import Sprite.MainCharaterSprite;
@@ -202,6 +203,7 @@ public abstract class Level extends JPanel{
         }
         scrolling();
         g2d.drawImage(img[0],mc.getPosX(),mc.getPosY(),mc.getWidth(),mc.getHeight(),null);
+        drawAttacks(g2d);
     }
     
     protected void collisionDetection(){
@@ -233,6 +235,12 @@ public abstract class Level extends JPanel{
         while(it.hasNext()){
             Entity e = it.next();
             e.setPosX(e.getPosX() + dx);
+        }
+    }
+    
+    protected void drawAttacks(Graphics2D g2d){
+        for(Attack a : mc.getAttacks()){
+            g2d.drawImage(a.getImg(),a.getPosX(),a.getPosY(),a.getWidth(),a.getHeight(),null);
         }
     }
 }
