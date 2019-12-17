@@ -22,11 +22,17 @@ public class Enemy extends DynamicEntity{
     private int spawnx;
     private boolean rightbound;
     private boolean leftbound;
+    private int deltaxright= deltax + 450;
+    private int deltaxleft= 450 -deltax;
 
-    public Enemy(int posX, int posY,String s) {
+    public Enemy(int posX, int posY, String s) {
         super(posX, posY);
         this.setHeight(90);
         this.setWidth(90);
+        this.leftbound=false;
+        this.rightbound=false;
+        
+        this.spawnx= 450;
         try {
             s_image = ImageIO.read(getClass().getResourceAsStream(s));
         } catch (IOException e) {
@@ -46,22 +52,21 @@ public class Enemy extends DynamicEntity{
 
     @Override
     public void movement() {
-        this.leftbound=false;
-        this.rightbound=false;
-        this.spawnx= this.getPosX();
-        while(true){
+//       while(true){
             System.out.println("Posizione del lupo:" + this.getPosX());
             System.out.println("Spawnx:" + this.spawnx);
+            System.out.println("rightbound:" + deltaxright);
+            System.out.println("leftbound:" + deltaxleft/*(this.spawnx - this.deltax)*/);
         
-        if(this.getPosX() == this.spawnx + deltax){
+        if(this.getPosX() == deltaxright/*this.spawnx + deltax*/){
             this.leftbound = false;
             this.rightbound = true;
         }
-        if(this.getPosX() == this.spawnx - deltax){
+        if(this.getPosX() == deltaxleft/*this.spawnx - deltax*/){
             this.leftbound = true;
             this.rightbound = false;
         }
-        if((this.rightbound == false) && (this.getPosX()< this.spawnx + deltax)){
+        if((this.rightbound == false) && (this.getPosX()< deltaxright/*this.spawnx + deltax*/)){
             super.setPosX( this.getPosX() + 1);
         }
         if((this.rightbound == true && this.leftbound==false)){
@@ -69,14 +74,14 @@ public class Enemy extends DynamicEntity{
             super.setPosX( this.getPosX() - 1);
         }
      
-            try {
-                Thread.sleep(20);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Enemy.class.getName()).log(Level.SEVERE, null, ex);
-            }
+//            try {
+//                Thread.sleep(20);
+//            } catch (InterruptedException ex) {
+//                Logger.getLogger(Enemy.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+   // }
+//    }
     }
-    }
-
     
     
     

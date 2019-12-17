@@ -26,7 +26,7 @@ import java.util.List;
 public class CommandsListener implements ActionListener{
     
     private MainCharacter mc;
-    private Level level;
+    protected Level level;
     
     /*It is used to manage the ActionListener Thread.*/
     private Timer timer;
@@ -63,6 +63,7 @@ public class CommandsListener implements ActionListener{
      */
     @Override
     public void actionPerformed(ActionEvent e) {
+        //move all entities
         this.mc.movement();
         updateAttacks();
         this.level.repaint();

@@ -1,5 +1,7 @@
 package Entities.DynamicEntities.Health;
 
+import javax.swing.JPanel;
+
 /**
  *
  * @author Silvio Maria Amato
@@ -11,13 +13,8 @@ public class EnemyHealth extends Health{
     }
 
     @Override
-    public void hurt() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void die() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void draw(JPanel panel) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
 }

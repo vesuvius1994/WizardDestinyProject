@@ -5,9 +5,7 @@
  */
 package LevelTest;
 
-import Commands.CommandsListener;
 import Level.DemoLevel;
-import Level.Level;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 
@@ -18,11 +16,11 @@ import javax.swing.JFrame;
 public class Main {
     public static void main(String[] args) throws InterruptedException{
         
-        Level demoLevel = new DemoLevel();        
+        DemoLevel demoLevel = new DemoLevel();        
         demoLevel.setPreferredSize(new Dimension(630, 480));
         
-        CommandsListener cmd = new CommandsListener(demoLevel);
-        cmd.startListener();
+        EnemyMovementTest cmd = new EnemyMovementTest(demoLevel);
+        cmd.setEnemy(demoLevel.getEnemy());
         
         JFrame testFrame = new JFrame("Demo Level");
         testFrame.setSize(630, 508);
@@ -30,5 +28,6 @@ public class Main {
         testFrame.setResizable(false);
 	testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         testFrame.add(demoLevel);
+        cmd.startListener();
     }
 }

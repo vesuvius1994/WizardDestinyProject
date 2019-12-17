@@ -1,18 +1,19 @@
 package Entities.DynamicEntities.Health;
 
+import javax.swing.JPanel;
+
 /**
  *
  * @author Silvio Maria Amato
  */
 public abstract class Health {
-    
+
     private int health = 0;
 
-    
-    public Health(int DEFAULT_HEALTH ) {
+    public Health(int DEFAULT_HEALTH) {
         health = DEFAULT_HEALTH;
     }
-    
+
     /**
      * Get the value of health
      *
@@ -31,7 +32,6 @@ public abstract class Health {
         this.health = health;
     }
 
-    public abstract void hurt();
-    
-    public abstract void die();
+    public abstract void draw(JPanel panel);
+
 }

@@ -43,7 +43,8 @@ public abstract class Level extends JPanel{
     protected ArrayList entities;
     
     /*Variable used for the "scrolling" operation.*/
-    protected int dx = 0;
+    protected int dxEntity = 0;
+    protected int dxTile = 0;
     
     /*Value of the center position of the panel.*/
     protected final int HALF_PANEL = 240;
@@ -59,8 +60,6 @@ public abstract class Level extends JPanel{
     /*Attributes to read more caracter from matrix*/
     protected Scanner scan;
     protected String str;
-
-    
     
     /*Strings containing the pathname of files ".map"
     *and ".png", respectively*/
@@ -86,10 +85,6 @@ public abstract class Level extends JPanel{
     public Level(){
         this.setPaths();
         
-        /**
-         * Only for test purpose. 
-         * To be deleted once a builder is defined.
-        */
         this.mc = new MainCharacter(10, 10);
         
         createBackground();
@@ -187,7 +182,7 @@ public abstract class Level extends JPanel{
                 int c = rc % 5;
                 int x = (int) (j * tileSize);
                 int y = (int) (i * tileSize);
-                g.drawImage(tiles[r][c], x + dx, y, null);
+                g.drawImage(tiles[r][c], x + dxTile, y, null);
             }
         }
     }
@@ -235,7 +230,8 @@ public abstract class Level extends JPanel{
     *Finally, the Main character position is setted to HALF_PANEL.*/
     protected void scrolling(){
         if(mc.getPosX() > HALF_PANEL){
-            dx -= 2;
+            dxTile -= 2;
+            dxEntity = -2;
             bg.update();
             this.updateEntitiesPosition();
             mc.setPosX(HALF_PANEL);
@@ -254,7 +250,7 @@ public abstract class Level extends JPanel{
 
             while(it.hasNext()){
                 Entity e = it.next();
-                e.setPosX(e.getPosX() + dx);
+                e.setPosX(e.getPosX() + dxEntity);
             }
         }
     }
