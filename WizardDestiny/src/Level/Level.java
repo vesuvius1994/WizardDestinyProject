@@ -117,7 +117,7 @@ public abstract class Level extends JPanel{
     /*It instantiates an object "Background" by providing
     *the pathname of the ".png" file related to the level.*/
     protected void createBackground(){
-        bg = new Background(this.backgroundPath, mc);
+        bg = new Background(this.backgroundPath);
     }
     
     /*It takes the pathname of a file ".map" as input
@@ -203,8 +203,12 @@ public abstract class Level extends JPanel{
         Graphics2D g2d = (Graphics2D) g;
         
         collisionDetection();
+        
         Iterator itr=sprite.iterator();
         BufferedImage[] img=(BufferedImage[])itr.next();
+        
+        scrolling();
+        
         /*draw background: MUST be managed inside 
         *CommandsListener.actionPerformed*/
         if(bg != null){
@@ -213,7 +217,7 @@ public abstract class Level extends JPanel{
         if(map != null){
             this.drawMap(g2d);
         }
-        scrolling();
+        
         g2d.drawImage(img[0],mc.getPosX(),mc.getPosY(),mc.getWidth(),mc.getHeight(),null);
         drawAttacks(g2d);
         drawSprite(g2d);
@@ -232,7 +236,7 @@ public abstract class Level extends JPanel{
     protected void scrolling(){
         if(mc.getPosX() > HALF_PANEL){
             dx -= 2;
-            //bg.update();
+            bg.update();
             this.updateEntitiesPosition();
             mc.setPosX(HALF_PANEL);
         } else if(mc.getPosX() < 0){
@@ -245,11 +249,13 @@ public abstract class Level extends JPanel{
     
     /*It updates all level entities position.*/
     protected void updateEntitiesPosition(){
-        Iterator<Entity> it = this.entities.iterator();
-        
-        while(it.hasNext()){
-            Entity e = it.next();
-            e.setPosX(e.getPosX() + dx);
+        if(this.entities != null){
+            Iterator<Entity> it = this.entities.iterator();
+
+            while(it.hasNext()){
+                Entity e = it.next();
+                e.setPosX(e.getPosX() + dx);
+            }
         }
     }
     

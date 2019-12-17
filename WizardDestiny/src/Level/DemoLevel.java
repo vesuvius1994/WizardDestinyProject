@@ -5,11 +5,6 @@
  */
 package Level;
 
-import Entities.DynamicEntities.Enemy;
-import Entities.DynamicEntities.MovThread;
-import Entities.Entity;
-import java.util.ArrayList;
-
 /**
  *THIS CLASS IS ONLY FOR TEST PURPOSE.
  * @author letga
@@ -31,41 +26,11 @@ public class DemoLevel extends Level{
             mc.setPosX(0);
         }
     }
-    
-    @Override
-    protected void scrolling(){
-        if(mc.getPosX() > 240){
-            dx -= 2;
-            //bg.update();
-            mc.setPosX(240);
-        }
-    }
-    
-    /*Useless methods, since these operations are handled by Level itself.*/
-//    public void setMainCharacter(MainCharacter mc){
-//        this.mc = mc;
-//    }
-//    
-//    public boolean canMoveForward(){
-//        return true;
-//    }
-//    
-//    public boolean canMoveBackward(){
-//        return true;
-//    }
-//    
-//    public boolean canJump(){
-//        return true;
-//    }
 
     @Override
     protected void setPaths() {
         this.mapLevelPath = "/Resources/level_1.map";
         this.backgroundPath = "/Resources/bg.png";
         this.tileMatrixPath = "/Resources/tileMatrix.png";
-    }
-    
-    public void setTestEnemy(Enemy enemy){
-        this.entities.add(enemy);
     }
 }
