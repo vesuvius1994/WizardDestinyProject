@@ -6,13 +6,12 @@
 package Level;
 
 import Entities.DynamicEntities.Attacks.Attack;
-import Entities.DynamicEntities.Enemy;
 import Entities.DynamicEntities.MainCharacter;
-import Entities.DynamicEntities.MovThread;
 import Entities.Entity;
-import Sprite.MainCharaterSprite;
+import Sprite.MainCharacterSprite;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -39,9 +38,6 @@ public abstract class Level extends JPanel{
     
     /*Instance of the Class Main Character.*/
     protected MainCharacter mc;
-    
-    /*Instance of the first enemies:wolfs*/
-    protected Enemy enemywolf;
     
     /*ArrayList containing all entities of the current Level.*/
     protected ArrayList entities;
@@ -78,7 +74,7 @@ public abstract class Level extends JPanel{
     protected final int tileSize = 30;
     
     /*Main Character Sprites*/
-    protected MainCharaterSprite mcs;
+    protected MainCharacterSprite mcs;
     protected ArrayList<BufferedImage[]> sprite;
     
     /*Class Level Constructor.
@@ -98,12 +94,8 @@ public abstract class Level extends JPanel{
         
         createBackground();
         setMap();
-        this.mcs = new MainCharaterSprite();
+        this.mcs = new MainCharacterSprite();
         this.sprite = mcs.getSprites();
-        this.enemywolf = new Enemy(450,370,"/Resources/wolf.png");
-        Thread t1 = new Thread(new MovThread(enemywolf));
-        t1.start();
-        
     }
     
     /**
@@ -223,8 +215,10 @@ public abstract class Level extends JPanel{
         }
         scrolling();
         g2d.drawImage(img[0],mc.getPosX(),mc.getPosY(),mc.getWidth(),mc.getHeight(),null);
-        g2d.drawImage(enemywolf.getS_image(),enemywolf.getPosX(),enemywolf.getPosY(),enemywolf.getWidth(),enemywolf.getHeight(),null);
         drawAttacks(g2d);
+        drawSprite(g2d);
+        Toolkit.getDefaultToolkit().sync();
+        //mettere ciclo for per disegnare TUTTE le tile di tutte le entity.
     }
     
     protected void collisionDetection(){
@@ -263,5 +257,12 @@ public abstract class Level extends JPanel{
         for(Attack a : mc.getAttacks()){
             g2d.drawImage(a.getImg(),a.getPosX(),a.getPosY(),a.getWidth(),a.getHeight(),null);
         }
+    }
+    
+    protected void drawSprite(Graphics2D g2d){
+        BufferedImage[] action=mcs.getSprites(mc.getState());
+        for(int i=0;i<action.length;i++)
+            g2d.drawImage(action[i],mc.getPosX(),mc.getPosY(),mc.getWidth(),mc.getHeight(),null);
+        //g2d.drawImage(action[0],mc.getPosX(),mc.getPosY(),mc.getWidth(),mc.getHeight(),null);
     }
 }

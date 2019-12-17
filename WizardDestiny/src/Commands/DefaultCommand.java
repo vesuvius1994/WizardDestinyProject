@@ -6,6 +6,7 @@
 package Commands;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 /**
  *
  * @author ludovicorusso
@@ -21,7 +22,7 @@ public class DefaultCommand extends SourceCommand{
     }
 
     @Override
-    public boolean getTypeCommand() {
+    public boolean getTypeCommand() throws IOException {
         return super.getTypeCommand(); //To change body of generated methods, choose Tools | Templates.
     }
 

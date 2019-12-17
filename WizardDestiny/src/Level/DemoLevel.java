@@ -5,6 +5,11 @@
  */
 package Level;
 
+import Entities.DynamicEntities.Enemy;
+import Entities.DynamicEntities.MovThread;
+import Entities.Entity;
+import java.util.ArrayList;
+
 /**
  *THIS CLASS IS ONLY FOR TEST PURPOSE.
  * @author letga
@@ -15,8 +20,6 @@ public class DemoLevel extends Level{
     private int platformX = 0;
     private int platformY = 450;
     private int platformLength = 540;
-    
-   
     
     @Override
     protected void collisionDetection(){
@@ -60,5 +63,9 @@ public class DemoLevel extends Level{
         this.mapLevelPath = "/Resources/level_1.map";
         this.backgroundPath = "/Resources/bg.png";
         this.tileMatrixPath = "/Resources/tileMatrix.png";
+    }
+    
+    public void setTestEnemy(Enemy enemy){
+        this.entities.add(enemy);
     }
 }

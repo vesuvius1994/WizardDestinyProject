@@ -6,7 +6,9 @@
 package Commands;
 
 import java.io.File;
-import java.util.*;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -23,16 +25,16 @@ public class SourceCommand {
         return attackB;
     }
 
-    public void setAttackB(int attack_b) {
-        this.attackB = attack_b;
+    public void setAttackB(int attackB) {
+        this.attackB = attackB;
     }
 
     public int getAttackS() {
         return attackS;
     }
 
-    public void setAttackS(int attack_s) {
-        this.attackS = attack_s;
+    public void setAttackS(int attackS) {
+        this.attackS = attackS;
     }
     
     
@@ -60,13 +62,23 @@ public class SourceCommand {
         this.sx = sx;
     }
 
-    
-
-    
-    public boolean getTypeCommand(){
-        File Command = new File("/src/PersonalizableComand/");
+    public PersonalizableCommand getPersonalizzable() throws IOException{
+        File Command=new File("src/Resources/personalizzablecommand.dat");
+        SerializzatoreCommand cmd =new SerializzatoreCommand();
         if (Command.exists())
-                return true;
-        return false;
+                try {
+                    return cmd.load();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SourceCommand.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+     public DefaultCommand getDefault() throws IOException{
+        return new DefaultCommand();
+    }
+    public boolean getTypeCommand() throws IOException{
+        File Command=new File("src/Resources/personalizzablecommand.dat");
+        SerializzatoreCommand cmd =new SerializzatoreCommand();
+        return Command.exists();
     }
 }

@@ -19,6 +19,8 @@ import java.util.List;
  * This Class manages controls input given by the Player.
  * It handles all events related to pressed keys.
  *
+ * N.B. Bisogna gestire il ritorno dallo stato ATTACK 
+ * a quello di IDLE.
  * @author letga
  */
 public class CommandsListener implements ActionListener{
@@ -98,12 +100,12 @@ public class CommandsListener implements ActionListener{
             } else if(key == mc.getCommand().getJump() && !isJumping){
                 new Thread(new JumpManagementThread()).start();
             } else if(key == mc.getCommand().getAttackB()){
-                mc.attack();
                 mc.setState(Entity.States.ATTACKING);
+                mc.attack();
             } else if(key == mc.getCommand().getAttackS() && mc.getEnergy() > 0){
+                mc.setState(Entity.States.S_ATTACKING);
                 mc.specialAttack();
                 mc.decreaseEnergy();
-                mc.setState(Entity.States.S_ATTACKING);
             }
             
         }
@@ -123,6 +125,10 @@ public class CommandsListener implements ActionListener{
                 mc.setDx(0);
                 mc.setState(Entity.States.IDLE);
             }
+            if(key == mc.getCommand().getAttackS() 
+                    || key == mc.getCommand().getAttackB()){
+                mc.setState(Entity.States.IDLE);
+            }
         }
     }
     
@@ -135,13 +141,14 @@ public class CommandsListener implements ActionListener{
         public void run() {
             try{
                 isJumping = true;
+                mc.setState(Entity.States.JUMPING);
                 mc.setDy(-3);
                 Thread.sleep(jumpingTime);
                 mc.setDy(3);
                 Thread.sleep(jumpingTime);
                 //mc.setDy(0);
                 isJumping = false;
-                
+                mc.setState(Entity.States.IDLE);
             }catch(InterruptedException e){
                 System.exit(0);
             }
