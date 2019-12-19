@@ -7,20 +7,14 @@ package Level;
 
 import Entities.DynamicEntities.Attacks.Attack;
 import Entities.DynamicEntities.MainCharacter;
+import Entities.DynamicEntities.Score.Score;
 import Entities.Entity;
 import Sprite.MainCharacterSprite;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Scanner;
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 /**
@@ -34,43 +28,31 @@ import javax.swing.JPanel;
  * 
  * @author letga
  */
-public abstract class Level extends JPanel{
+public class Level extends JPanel{
     
     /*Instance of the Class Main Character.*/
     protected MainCharacter mc;
     
-    /*ArrayList containing all entities of the current Level.*/
-    protected ArrayList entities;
+    protected Score score;
+    
+    /*ArrayLists containing all entities of the current Level.*/
+    protected ArrayList dynamicEntities;
+    protected ArrayList staticEntities;
+    
+    /*ArrayLists containing all tiles of level entities*/
+    protected ArrayList dynamicTiles;
+    protected ArrayList staticTiles;
+    
+    /*Level Background*/
+    protected Background background;
     
     /*Variable used for the "scrolling" operation.*/
     protected int dxEntity = 0;
-    protected int dxTile = 0;
+    protected int scrolledPixels = 0;
+    protected final int levelEnd;
     
     /*Value of the center position of the panel.*/
-    protected final int HALF_PANEL = 240;
-    
-    /*Map attributes*/
-    protected int map[][];
-    protected int numCols;
-    protected int numRows;
-    protected Background bg;
-    protected int numRowsMatrix;
-    protected int numColsMatrix;
-    
-    /*Attributes to read more caracter from matrix*/
-    protected Scanner scan;
-    protected String str;
-    
-    /*Strings containing the pathname of files ".map"
-    *and ".png", respectively*/
-    protected String mapLevelPath;
-    protected String tileMatrixPath;
-    protected String backgroundPath;
-    
-    /*Tileset attributes*/
-    protected BufferedImage tileset;
-    protected BufferedImage[][] tiles;
-    protected final int tileSize = 30;
+    protected final int HALF_PANEL;
     
     /*Main Character Sprites*/
     protected MainCharacterSprite mcs;
@@ -82,15 +64,27 @@ public abstract class Level extends JPanel{
     *and draws their relative tiles.
     *Also, it instantiates the Main Character tiles manager.
     **/
-    public Level(){
-        this.setPaths();
+    public Level(ArrayList dynamicEntities, ArrayList staticEntities, 
+            ArrayList dynamicTiles, ArrayList staticTiles, 
+            Background background, int levelEnd){
+        
+        this.dynamicEntities = dynamicEntities;
+        this.staticEntities = staticEntities;
+        
+        this.staticTiles = staticTiles;
+        this.dynamicTiles = dynamicTiles;
         
         this.mc = new MainCharacter(10, 10);
-        
-        createBackground();
-        setMap();
         this.mcs = new MainCharacterSprite();
         this.sprite = mcs.getSprites();
+        
+        this.score = new Score(0);
+        
+        this.HALF_PANEL = 315;
+        
+        this.background = background;
+        
+        this.levelEnd = levelEnd;
     }
     
     /**
@@ -101,93 +95,6 @@ public abstract class Level extends JPanel{
         return this.mc;
     }
     
-    protected abstract void setPaths();
-    
-    /*It invokes private methods "loadMap" and "loadTile"*/
-    protected void setMap(){
-        this.loadMap(this.mapLevelPath);
-        this.loadTile(this.tileMatrixPath);
-    }
-    
-    /*It instantiates an object "Background" by providing
-    *the pathname of the ".png" file related to the level.*/
-    protected void createBackground(){
-        bg = new Background(this.backgroundPath);
-    }
-    
-    /*It takes the pathname of a file ".map" as input
-    *in order to fill the object "map"
-    *with information about the level entities
-    *and their tiles.*/
-    protected void loadMap(String s) {
-
-        int temp = 0;
-
-        try {
-            InputStream in = getClass().getResourceAsStream(s);
-            BufferedReader br = new BufferedReader(new InputStreamReader(in));
-
-            numRowsMatrix = Integer.parseInt(br.readLine());
-            numColsMatrix = Integer.parseInt(br.readLine());
-            map = new int[numRowsMatrix][numColsMatrix];
-
-            for (int i = 0; i < numRowsMatrix; i++) {
-                str = br.readLine();
-                scan = new Scanner(str);
-                for (int j = 0; j < numColsMatrix; j++) {
-                    temp = scan.nextInt();
-                        if(temp!=-1){
-                            map[i][j] = temp;
-                        }
-                }
-            }
-        } catch (IOException e) {
-            System.out.print("sto in errore sulla matrice");
-        }
-    }
-    
-    /*It takes the pathname of a file ".png."
-    *containing all level tiles.
-    *It reads tiles information from the file
-    *in order to fill the BufferedImage object "tiles".*/
-    protected void loadTile(String s) {
-
-        try {
-            tileset = ImageIO.read(getClass().getResourceAsStream(s));
-            numCols = tileset.getWidth() / tileSize;
-            numRows = tileset.getHeight() / tileSize;
-            tiles = new BufferedImage[numRows][numCols];
-
-            for (int i = 0; i < numRows; i++) {
-                for (int j = 0; j < numCols; j++) {
-                    tiles[i][j] = tileset.getSubimage(j * tileSize, i * tileSize, tileSize, tileSize);
-                }
-            }
-        } catch (IOException e) {
-            System.out.print("Error during loadTile operation.\n");
-        }
-
-    }
-    
-    /*It takes a Graphics2D object as input
-    *in order to draws all entities tiles
-    *on the screen by using objects "map"
-    *and "tiles".*/
-    protected void drawMap(Graphics2D g) {
-
-        for (int i = 0; i < numRowsMatrix; i++) {
-            for (int j = 0; j < numColsMatrix; j++) {
-                int rc = map[i][j];
-                int r = rc / 5;
-                int c = rc % 5;
-                int x = (int) (j * tileSize);
-                int y = (int) (i * tileSize);
-                g.drawImage(tiles[r][c], x + dxTile, y, null);
-            }
-        }
-    }
-    
-    
     /*It draws all level tiles on the panel
     *and invokes "collisionDetection" and "scrolling" methods.
     *In addition, it draws Main Character sprite.*/
@@ -196,28 +103,21 @@ public abstract class Level extends JPanel{
         super.paint(g);
         
         Graphics2D g2d = (Graphics2D) g;
-        
-        collisionDetection();
-        
-        Iterator itr=sprite.iterator();
-        BufferedImage[] img=(BufferedImage[])itr.next();
+                
+        //To test without if statement.
+        if(background != null){
+            background.draw(g2d);
+        }
         
         scrolling();
         
-        /*draw background: MUST be managed inside 
-        *CommandsListener.actionPerformed*/
-        if(bg != null){
-            bg.draw(g2d);
-        }
-        if(map != null){
-            this.drawMap(g2d);
-        }
-        
-        g2d.drawImage(img[0],mc.getPosX(),mc.getPosY(),mc.getWidth(),mc.getHeight(),null);
-        drawAttacks(g2d);
+        drawTiles(g2d);
         drawSprite(g2d);
+        drawAttacks(g2d);
+        
+        this.score.draw(g2d);
+        
         Toolkit.getDefaultToolkit().sync();
-        //mettere ciclo for per disegnare TUTTE le tile di tutte le entity.
     }
     
     protected void collisionDetection(){
@@ -229,29 +129,29 @@ public abstract class Level extends JPanel{
     *greater than the HALF_PANEL value.
     *Finally, the Main character position is setted to HALF_PANEL.*/
     protected void scrolling(){
-        if(mc.getPosX() > HALF_PANEL){
-            dxTile -= 2;
+        if(mc.getPosX() > HALF_PANEL && (levelEnd - scrolledPixels ) > (HALF_PANEL * 2)){
             dxEntity = -2;
-            bg.update();
+            scrolledPixels += 2;
+            if(scrolledPixels % 4 == 0){
+                background.update();
+            }
             this.updateEntitiesPosition();
             mc.setPosX(HALF_PANEL);
-        } else if(mc.getPosX() < 0){
+        } else if(mc.getPosX() < 0)
             mc.setPosX(0);
-        }
-        /**
-         * Mettere condizione per fine livello.
-         */ 
+        
     }
     
     /*It updates all level entities position.*/
     protected void updateEntitiesPosition(){
-        if(this.entities != null){
-            Iterator<Entity> it = this.entities.iterator();
-
-            while(it.hasNext()){
-                Entity e = it.next();
-                e.setPosX(e.getPosX() + dxEntity);
-            }
+        for(int i = 0; i < this.staticEntities.size(); i++){
+            Entity e = (Entity) this.staticEntities.get(i);
+            e.setPosX(e.getPosX() + this.dxEntity);
+        }
+        
+        for(int i = 0; i < this.dynamicEntities.size(); i++){
+            Entity e = (Entity) this.dynamicEntities.get(i);
+            e.setPosX(e.getPosX() + this.dxEntity);
         }
     }
     
@@ -262,9 +162,26 @@ public abstract class Level extends JPanel{
     }
     
     protected void drawSprite(Graphics2D g2d){
+        mc.getHealth().draw(g2d);
         BufferedImage[] action=mcs.getSprites(mc.getState());
         for(int i=0;i<action.length;i++)
             g2d.drawImage(action[i],mc.getPosX(),mc.getPosY(),mc.getWidth(),mc.getHeight(),null);
-        //g2d.drawImage(action[0],mc.getPosX(),mc.getPosY(),mc.getWidth(),mc.getHeight(),null);
+    }
+    
+    protected void drawTiles(Graphics2D g2d){
+        
+        for(int i = 0; i < this.dynamicTiles.size(); i++){
+            Entity e = (Entity) this.dynamicEntities.get(i);
+            BufferedImage img = (BufferedImage) this.dynamicTiles.get(i);
+            
+            g2d.drawImage(img, e.getPosX(), e.getPosY(), null);
+        }
+        
+        for(int i = 0; i < this.staticTiles.size(); i++){
+            Entity e = (Entity) this.staticEntities.get(i);
+            BufferedImage img = (BufferedImage) this.staticTiles.get(i);
+            
+            g2d.drawImage(img, e.getPosX(), e.getPosY(), null);
+        }
     }
 }

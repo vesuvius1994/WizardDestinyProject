@@ -21,7 +21,11 @@ public abstract class DynamicEntity extends Entity{
         super(posX, posY);
     }
     
-    @Override
+    /**
+     * Handles Entity's attack
+     */
+    public abstract void attack();
+    
     public void movement() {
         //template method
         

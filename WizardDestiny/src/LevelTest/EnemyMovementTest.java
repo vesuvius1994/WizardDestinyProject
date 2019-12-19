@@ -5,8 +5,9 @@
  */
 package LevelTest;
 
-import Commands.CommandsListener;
+import Commands.LevelManager;
 import Entities.DynamicEntities.Enemy;
+import Entities.DynamicEntities.Werewolf;
 import Level.Level;
 import java.awt.event.ActionEvent;
 
@@ -14,9 +15,9 @@ import java.awt.event.ActionEvent;
  *
  * @author letga
  */
-public class EnemyMovementTest extends CommandsListener {
+public class EnemyMovementTest extends LevelManager {
     
-    private Enemy enemy;
+    private Werewolf enemy;
     
     public EnemyMovementTest(Level level) {
         super(level);
@@ -28,7 +29,7 @@ public class EnemyMovementTest extends CommandsListener {
         enemy.movement();
     }
     
-    public void setEnemy(Enemy e){
+    public void setEnemy(Werewolf e){
         this.enemy = e;
     }
 }

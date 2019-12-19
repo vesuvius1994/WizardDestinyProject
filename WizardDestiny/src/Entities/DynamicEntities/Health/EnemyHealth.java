@@ -1,6 +1,6 @@
 package Entities.DynamicEntities.Health;
 
-import javax.swing.JPanel;
+import java.awt.Graphics2D;
 
 /**
  *
@@ -8,12 +8,12 @@ import javax.swing.JPanel;
  */
 public class EnemyHealth extends Health{
 
-    public EnemyHealth(int DEFAULT_HEALTH) {
-        super(DEFAULT_HEALTH);
+    public EnemyHealth(int health) {
+        super(health);
     }
 
     @Override
-    public void draw(JPanel panel) {
+    public void draw(Graphics2D g2d) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     

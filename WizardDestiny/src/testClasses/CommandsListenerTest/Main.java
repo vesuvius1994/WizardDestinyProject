@@ -5,7 +5,7 @@
  */
 package testClasses.CommandsListenerTest;
 
-import Commands.CommandsListener;
+import Commands.LevelManager;
 import Commands.DefaultCommand;
 import Commands.SourceCommand;
 import Entities.DynamicEntities.MainCharacter;
@@ -30,7 +30,7 @@ public class Main {
         MainCharacter mc = new MainCharacter(100,200);
         testLevel.setMainCharacter(mc);
                 
-        //CommandsListener cmd = new CommandsListener(mc, testLevel);
+        //CommandsListener cmd = new LevelManager(mc, testLevel);
     }
     
 }

@@ -23,15 +23,4 @@ public class Diamond extends StaticEntity{
     public int getValue() {
         return value;
     }
-    
-    @Override
-    public void movement() {
-        System.out.print("\n************Not implemented***********\n");
-    }
-
-    @Override
-    public void attack() {
-        System.out.print("\n************Not implemented***********\n");
-    }
-    
 }

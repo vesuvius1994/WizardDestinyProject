@@ -159,15 +159,4 @@ public abstract class Entity {
         this.posX = x;
         this.posY = y;
     }
-    
-    /**
-     * Handles Entity's movement
-     */
-    public abstract void movement();
-    
-    /**
-     * Handles Entity's attack
-     */
-    public abstract void attack();
-    
 }

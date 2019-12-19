@@ -39,13 +39,13 @@ public class CommandsListenerTest {
     }
 
     /**
-     * Test of actionPerformed method, of class CommandsListener.
+     * Test of actionPerformed method, of class LevelManager.
      */
     @Test
     public void testActionPerformed() {
         System.out.println("actionPerformed");
         ActionEvent e = null;
-        CommandsListener instance = null;
+        LevelManager instance = null;
         instance.actionPerformed(e);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

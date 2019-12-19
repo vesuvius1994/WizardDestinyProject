@@ -7,6 +7,7 @@ package Commands;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,7 +15,7 @@ import java.util.logging.Logger;
  *
  * @author ludovicorusso
  */
-public class SourceCommand {
+public class SourceCommand implements Serializable {
     private int jump;
     private int dx;
     private int sx;

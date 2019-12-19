@@ -1,6 +1,6 @@
 package Entities.DynamicEntities.Health;
 
-import javax.swing.JPanel;
+import java.awt.Graphics2D;
 
 /**
  *
@@ -10,8 +10,8 @@ public abstract class Health {
 
     private int health = 0;
 
-    public Health(int DEFAULT_HEALTH) {
-        health = DEFAULT_HEALTH;
+    public Health(int health) {
+        this.health = health;
     }
 
     /**
@@ -32,6 +32,6 @@ public abstract class Health {
         this.health = health;
     }
 
-    public abstract void draw(JPanel panel);
+    public abstract void draw(Graphics2D g2d);
 
 }

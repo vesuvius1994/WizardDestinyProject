@@ -7,6 +7,8 @@ package Entities.DynamicEntities;
 
 import Commands.*;
 import Entities.DynamicEntities.Attacks.*;
+import Entities.DynamicEntities.Health.MainCharacterHealth;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,15 +21,29 @@ public class MainCharacter extends DynamicEntity{
     // Character commands
     private SourceCommand command;
     private List<Attack> Attacks;
-
+    protected MainCharacterHealth health;
+    
     public MainCharacter(int posX, int posY) {
         super(posX, posY);
         
         this.Attacks = new ArrayList();
-        this.command = new DefaultCommand();
-        //invocare i metodi per acquisire file dei comandi
+        this.command = new SourceCommand();
+        this.health = new MainCharacterHealth(5);
+        
         this.setHeight(45);
         this.setWidth(45);
+        try{
+        if(this.command.getTypeCommand()){ //Verify if exists a file with a presonalizzable command.
+            PersonalizableCommand p =new PersonalizableCommand(0,0,0,0,0);
+            p=this.command.getPersonalizzable();
+            this.command=p;
+        }
+        else{
+             this.command=new DefaultCommand();
+        }
+        }catch(IOException e){
+            this.command = new DefaultCommand(); // In case of Exception, it instantiates the default command 
+        }
     }
 
     public SourceCommand getCommand() {
@@ -48,6 +64,10 @@ public class MainCharacter extends DynamicEntity{
     
     public void decreaseEnergy(){
         System.out.print("\n----Energy decreased----\n");
+    }
+    
+    public MainCharacterHealth getHealth() {
+        return health;
     }
 
     public List<Attack> getAttacks() {

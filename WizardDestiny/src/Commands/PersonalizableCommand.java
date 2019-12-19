@@ -17,7 +17,7 @@ public class PersonalizableCommand extends SourceCommand implements Serializable
         super.setJump(jump);
         super.setDx(dx);
         super.setSx(sx);
-        super.setAttackS(attackS);
+        super.setAttackB(attackB);
         super.setAttackS(attackS);
     }
     

@@ -19,6 +19,7 @@ public class Background {
     private BufferedImage image;
     
     private int posX;
+    private int nextReprint;
 
     /**
      *
@@ -33,6 +34,7 @@ public class Background {
         } catch (IOException e) {
             System.out.println("sto in errore");
         }
+        
         posX = 0;
     }
     
@@ -42,6 +44,9 @@ public class Background {
 
     public void draw(Graphics2D g2D) {
         g2D.drawImage(image, posX, 0, null);
+        if(posX + image.getWidth() < 1240){ //da sistemare
+            g2D.drawImage(image, posX + image.getWidth(), 0, null);
+        }
     }
    
     public void update(){
