@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package GUI;
-
 import Commands.DefaultCommand;
 import Commands.PersonalizableCommand;
 import Commands.SerializzatoreCommand;
@@ -46,13 +45,12 @@ public class guiCommand extends javax.swing.JFrame {
             textBasicAttack.setText(KeyEvent.getKeyText(dc.getAttackB()));
             textSpecialAttack.setText(KeyEvent.getKeyText(dc.getAttackS()));
             textDx.setText(KeyEvent.getKeyText(dc.getDx()));
-            textSx.setText(KeyEvent.getKeyText(dc.getSx()));
+            textSx.setText(KeyEvent.getKeyText(dc.getSx())); 
             p.setJump(dc.getJump());
-            p.setSx(dc.getSx());
             p.setDx(dc.getDx());
+            p.setSx(dc.getSx());
             p.setAttack_b(dc.getAttackB());
             p.setAttack_s(dc.getAttackS());
-                    
         }
     }
 
@@ -307,7 +305,7 @@ public class guiCommand extends javax.swing.JFrame {
     }//GEN-LAST:event_button1ActionPerformed
 
     private void btnRestoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestoreActionPerformed
-        File Command=new File("/Resources/personalizzablecommand.dat");
+        File Command=new File("src/Resources/personalizzablecommand.dat");
         Command.delete();
         textJump.setText(KeyEvent.getKeyText(dc.getJump()));
         textBasicAttack.setText(KeyEvent.getKeyText(dc.getAttackB()));

@@ -130,7 +130,7 @@ public class Director {
                 int x = (int) (j * tileSize);
                 int y = (int) (i * tileSize);
                 
-                if(r == 1 && c == 1){
+                if(r == 1 && c == 0){
                     this.builder.buildEnemy(x, y, tiles[r][c]);
                 } else if(r == 1 && c == 5){
                     this.builder.buildDiamond(x, y);
@@ -139,7 +139,7 @@ public class Director {
                 }
             }
         }
-        this.builder.buildLevelEnd((this.numColsMatrix * this.tileSize));
+        this.builder.buildLevelEnd((this.numColsMatrix * this.tileSize) + 30);
         this.level = this.builder.getResult();
     }
     

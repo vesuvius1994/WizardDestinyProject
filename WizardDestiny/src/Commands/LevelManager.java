@@ -11,7 +11,10 @@ import javax.swing.Timer;
 import Entities.DynamicEntities.*;
 import Entities.DynamicEntities.Attacks.Attack;
 import Entities.Entity;
+import Entities.StaticEntities.Block;
+import Entities.StaticEntities.Diamond;
 import Level.Level;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -66,6 +69,8 @@ public class LevelManager implements ActionListener{
         //move all entities
         this.mc.movement();
         updateAttacks();
+        this.collisionDetection(this.level.getDynamicEntities(), 
+                this.level.getStaticEntities());
         this.level.repaint();
         //refresh tile of Main Character
     }
@@ -76,12 +81,104 @@ public class LevelManager implements ActionListener{
     private void updateAttacks(){
         List<Attack> Attacks = mc.getAttacks();
         for(Attack a : Attacks){
-            if(a.isVisible())
+            if(a.isVisible()){
                 a.movement();
+                this.attackCollisionDetection(this.level.getDynamicEntities(), this.level.getStaticEntities(), a);
+            }
             else
                 Attacks.remove(a);
         }
     }
+    
+    private void attackCollisionDetection(ArrayList<Entity> dynamicEntities,
+            ArrayList<Entity> staticEntities, Attack attack){
+        
+        for(int i = 0; i < dynamicEntities.size(); i++){
+            Enemy enemy = (Enemy) dynamicEntities.get(i);
+            if(enemy.getBounds().intersects(attack.getBounds())){
+            if ((attack.getPosX() + attack.getWidth()) >= enemy.getPosX() &&
+                    attack.getPosX() < enemy.getPosX() &&
+                     attack.getPosY() <= (enemy.getPosY() + 30) 
+                    & attack.getPosY() > enemy.getPosY()) {
+                //non posso andare a destra
+                attack.setPosY(-100);
+                enemy.setPosX(-10);
+            }
+        }
+        }
+        
+        for(int i = 0; i < staticEntities.size(); i++){
+            if (staticEntities.get(i) instanceof Block 
+                && staticEntities.get(i).getBounds().intersects(attack.getBounds())) {
+                Block block = (Block) staticEntities.get(i);
+                if ((attack.getPosX() + attack.getWidth()) >= block.getPosX() &&
+                    attack.getPosX() < block.getPosX() &&
+                     attack.getPosY() <= (block.getPosY() + 30) 
+                    & attack.getPosY() > block.getPosY()) {
+                //non posso andare a destra
+                attack.setPosY(-100);
+            }
+            }
+        }
+    }
+    private void collisionDetection(ArrayList<Entity> dynamicEntities, 
+            ArrayList<Entity> staticEntities){
+        
+        for(int i = 0; i < staticEntities.size(); i++){
+             /*Intersazione lato destro di un blocco*/ 
+        if (staticEntities.get(i) instanceof Block 
+                && staticEntities.get(i).getBounds().intersects(this.mc.getBounds())) {
+            //sto intersecando il lato sinistro della tile
+            Block block = (Block) staticEntities.get(i);
+            if ((mc.getPosX() + mc.getWidth()) >= block.getPosX() &&
+                    mc.getPosX() < block.getPosX() &&
+                    mc.getPosY() <= (block.getPosY() + 30) &&
+                    mc.getPosY() > block.getPosY()) {
+                //non posso andare a destra
+                mc.setPosX(block.getPosX() - mc.getWidth());
+            }
+            //sto intersecando il lato inferiore della tile
+            else if ((mc.getPosX() + mc.getWidth()) < (block.getPosX() + 30) 
+                    & (mc.getPosX() + mc.getWidth()) > block.getPosX() 
+                    & mc.getPosY() < (block.getPosY() + block.getHeight())) {
+                //stop jumping
+                mc.setPosY(block.getPosY() + block.getHeight());
+            } 
+            //sto intersecando il lato destro della tile
+            else if (mc.getPosX() <= (block.getPosX() + 30) &&
+                    (mc.getPosX() + mc.getWidth()) > (block.getPosX() + block.getWidth())
+                    & mc.getPosY() <= (block.getPosY() + 30) 
+                    & mc.getPosY() > block.getPosY()) {
+                //non posso andare a sinistra
+                mc.setPosX(block.getPosX() + block.getWidth());
+            }
+            //sto intersecando il lato superiore della tile
+            else {
+                //stop falling
+                mc.setPosY(block.getPosY() - mc.getHeight());
+            }
+        } else if (staticEntities.get(i) instanceof Diamond 
+                && staticEntities.get(i).getBounds().intersects(this.mc.getBounds())) {
+            this.level.incrementScore();
+            staticEntities.get(i).setPosX(-10);
+       }
+    }
+    //collision between main character and enemies
+        for (int i = 0; i < dynamicEntities.size(); i++) {
+            if (dynamicEntities.get(i) instanceof Enemy
+                    && dynamicEntities.get(i).getBounds().intersects(this.mc.getBounds())) {
+                Enemy enemy = (Enemy) dynamicEntities.get(i);
+                if(mc.getHealth().getHealth() > 0 &&
+                        (mc.getPosX() + mc.getWidth()) >= enemy.getPosX() &&
+                        mc.getPosX() < enemy.getPosX() &&
+                        !((mc.getPosY() + mc.getHeight()) < enemy.getPosY())){
+                    mc.setPosX(mc.getPosX() - 40);
+                    mc.getHealth().setHealth(mc.getHealth().getHealth() - 1);
+                }
+            }
+
+        }
+}
     
     /**
      * It handles all inputs given by the Player.

@@ -5,6 +5,8 @@
  */
 package Entities;
 
+import java.awt.Rectangle;
+
 /**
  *
  * @author Jonathan De Maio <j.demaio1@studenti.unisa.it>
@@ -158,5 +160,9 @@ public abstract class Entity {
     public void setPosition(int x, int y){
         this.posX = x;
         this.posY = y;
+    }
+    
+    public Rectangle getBounds() {
+        return new Rectangle(this.posX, this.posY, this.getHeight(), this.getWidth());
     }
 }

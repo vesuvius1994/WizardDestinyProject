@@ -10,6 +10,8 @@ import Entities.DynamicEntities.MainCharacter;
 import Entities.DynamicEntities.Score.Score;
 import Entities.Entity;
 import Sprite.MainCharacterSprite;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
@@ -114,7 +116,11 @@ public class Level extends JPanel{
         drawTiles(g2d);
         drawSprite(g2d);
         drawAttacks(g2d);
-        
+        if (mc.getHealth().getHealth() <= 0) {
+            g2d.setFont(new Font("Papyrus", Font.BOLD, 80));
+            g2d.setColor(Color.white);
+            g2d.drawString("Game Over", 100, 230);
+        }
         this.score.draw(g2d);
         
         Toolkit.getDefaultToolkit().sync();
@@ -183,5 +189,17 @@ public class Level extends JPanel{
             
             g2d.drawImage(img, e.getPosX(), e.getPosY(), null);
         }
+    }
+    
+    public ArrayList<Entity> getStaticEntities(){
+        return this.staticEntities;
+    }
+    
+    public ArrayList<Entity> getDynamicEntities(){
+        return this.dynamicEntities;
+    }
+    
+    public void incrementScore(){
+        this.score.setScore(score.getScore() + 5);
     }
 }

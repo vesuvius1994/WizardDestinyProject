@@ -23,8 +23,8 @@ public class Enemy extends DynamicEntity{
 
     public Enemy(int posX, int posY) {
         super(posX, posY);
-        this.setHeight(30);
-        this.setWidth(30);
+        this.setHeight(45);
+        this.setWidth(45);
         this.leftbound=false;
         this.rightbound=false;
         
