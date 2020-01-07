@@ -187,6 +187,7 @@ public class LevelManager implements ActionListener{
                 sound.playClip("src/Resources/SoundPack/sfx_diamond.wav");
                 
             }
+            
         }
         
         for(int i = 0; i < dynamicEntities.size(); i++){
@@ -214,6 +215,10 @@ public class LevelManager implements ActionListener{
                     isWalkingLeft = false;
                 } 
             }
+        }
+        
+        if(mc.getPosY() > 530){
+            mc.getHealth().setHealth(0);
         }
         
     }
