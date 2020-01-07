@@ -9,16 +9,16 @@ import Commands.LevelManager;
 import Level.Level;
 import LevelBuilder.Director;
 import javax.swing.JFrame;
-
+import GameSound.Sound;
 /**
  *
  * @author letga
  */
-public class Main {
-    public static void main(String[] args){
-        
+public class Main extends Thread{
+    
+    
+    public static void main(String[] args) throws InterruptedException{
         Director dir = new Director();
-        System.out.println(dir);
         Level level = null;
         
         do{ 
@@ -34,9 +34,17 @@ public class Main {
 	testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         level.setSize(630, 508);
         testFrame.add(level);
-        
         LevelManager mng = new LevelManager(level);
         mng.startListener();
+        Sound sound=new Sound();
+        sound.playClip("src/Resources/SoundPack/sfx_gameloop.wav");
+        Thread test = new Thread(new ThreadTest(level,testFrame,sound));
+        test.start();
+        
         
     }
-}
+
+ 
+} 
+
+

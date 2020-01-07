@@ -60,6 +60,8 @@ public class Level extends JPanel{
     protected MainCharacterSprite mcs;
     protected ArrayList<BufferedImage[]> sprite;
     
+    protected boolean gameOver;
+    
     /*Class Level Constructor.
     *It instantiates the background of the level,
     *creates the entities map of the level
@@ -87,6 +89,8 @@ public class Level extends JPanel{
         this.background = background;
         
         this.levelEnd = levelEnd;
+        
+        this.gameOver = false;
     }
     
     /**
@@ -116,11 +120,17 @@ public class Level extends JPanel{
         if (mc.getHealth() <= 0) {
             g2d.setFont(new Font("Papyrus", Font.BOLD, 80));
             g2d.setColor(Color.white);
+            mc.setState(Entity.States.DEAD);
             g2d.drawString("Game Over", 100, 230);
+            this.gameOver = true;
         }
         this.score.draw(g2d);
         
         Toolkit.getDefaultToolkit().sync();
+    }
+    
+    public boolean isGameOver(){
+        return this.gameOver;
     }
     
     /*When it is invoked, it calls all updating position methods

@@ -248,31 +248,34 @@ public class LevelManager implements ActionListener{
         
         @Override
         public void keyPressed(KeyEvent e){
-            int key = e.getKeyCode();
-            
-            if(key == mc.getCommand().getDx()){
-                mc.setDx(2);
-                mc.setState(Entity.States.WALKING);
-                isWalkingRight = true;
-            } else if(key == mc.getCommand().getSx()){
-                mc.setDx(-2);
-                mc.setState(Entity.States.WALKING);
-                isWalkingLeft = true;
-            } else if(key == mc.getCommand().getJump() && !isJumping && !isFalling){
-                new Thread(new JumpManagementThread()).start();
-                sound.playClip("src/Resources/SoundPack/sfx_movement_jump.wav");
-            } else if(!isAttacking && key == mc.getCommand().getAttackB()){
-                isAttacking = true;
-                mc.setState(Entity.States.ATTACKING);
-                mc.attack();
-                sound.playClip("src/Resources/SoundPack/sfx_basicattack.wav");
-            } else if(!isAttacking && key == mc.getCommand().getAttackS()){
-                isAttacking = true;
-                mc.setState(Entity.States.S_ATTACKING);
-                mc.specialAttack();
-                sound.playClip("src/Resources/SoundPack/sfx_specialattack.wav");
-            }
-            
+              if(mc.getState() != Entity.States.DEAD){
+                int key = e.getKeyCode();
+              
+                if(key == mc.getCommand().getDx()){
+                    mc.setDx(2);
+                    mc.setState(Entity.States.WALKING);
+                    isWalkingRight = true;
+                } else if(key == mc.getCommand().getSx()){
+                    mc.setDx(-2);
+                    mc.setState(Entity.States.WALKING);
+                    isWalkingLeft = true;
+                } else if(key == mc.getCommand().getJump() && !isJumping && !isFalling){
+                    new Thread(new JumpManagementThread()).start();
+                    sound.playClip("src/Resources/SoundPack/sfx_movement_jump.wav");
+                } else if(!isAttacking && key == mc.getCommand().getAttackB()){
+                    isAttacking = true;
+                    mc.setState(Entity.States.ATTACKING);
+                    mc.attack();
+                    sound.playClip("src/Resources/SoundPack/sfx_basicattack.wav");
+                } else if(!isAttacking && key == mc.getCommand().getAttackS()){
+                    isAttacking = true;
+                    mc.setState(Entity.States.S_ATTACKING);
+                    mc.specialAttack();
+                    sound.playClip("src/Resources/SoundPack/sfx_specialattack.wav");
+                }
+              }else{
+                  timer.stop();
+              }
         }
 
         @Override

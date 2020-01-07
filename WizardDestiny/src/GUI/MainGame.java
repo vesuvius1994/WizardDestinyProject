@@ -23,11 +23,10 @@ public class MainGame extends javax.swing.JFrame {
      * Creates new form MainGame
      */
     private Sound sound;
-    private Sound soundloop;
+    
     public MainGame() {
         initComponents();
         sound=new Sound();
-        sound.playClip("src/Resources/SoundPack/sfx_gameloop.wav");
     }
     
     /**
@@ -133,7 +132,11 @@ public class MainGame extends javax.swing.JFrame {
            sound.playClip("src/Resources/SoundPack/sfx_sounds_button2.wav");
        }
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+           try {
                Main.main(null);
+           } catch (InterruptedException ex) {
+               Logger.getLogger(MainGame.class.getName()).log(Level.SEVERE, null, ex);
+           }
                this.setVisible(false);
                sound.playClip("src/Resources/SoundPack/sfx_menu_select1.wav");
         }
