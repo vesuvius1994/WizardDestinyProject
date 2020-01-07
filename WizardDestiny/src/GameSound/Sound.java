@@ -38,4 +38,8 @@ public class Sound {
    public void stopClip(){
        clip.stop();
    }
+   
+   public void loop(){
+       clip.loop(Clip.LOOP_CONTINUOUSLY);
+   }
 }

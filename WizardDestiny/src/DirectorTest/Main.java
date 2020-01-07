@@ -38,6 +38,7 @@ public class Main extends Thread{
         mng.startListener();
         Sound sound=new Sound();
         sound.playClip("src/Resources/SoundPack/sfx_gameloop.wav");
+        sound.loop();
         Thread test = new Thread(new ThreadTest(level,testFrame,sound));
         test.start();
         
