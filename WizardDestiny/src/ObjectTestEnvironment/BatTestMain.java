@@ -5,22 +5,22 @@
  */
 package ObjectTestEnvironment;
 
-import Entities.DynamicEntities.Enemy.Spider;
+import Entities.DynamicEntities.Enemy.Bat;
+import Entities.DynamicEntities.Enemy.Werewolf;
 import javax.swing.JFrame;
 
 /**
  *
  * @author letga
  */
-public class Main {
-    
+public class BatTestMain {
     public static void main(String[] args) throws InterruptedException{
         long count = 0;
         boolean toScroll = false;
         
-        Spider spider = new Spider(500, 70);
+        Bat bat = new Bat(315, 254);
         
-        ObjectPainter painter = new ObjectPainter(spider, toScroll);
+        ObjectPainter painter = new ObjectPainter(bat, toScroll);
         
         JFrame testFrame = new JFrame("Object Test Environment");
         testFrame.setSize(630, 508);
@@ -33,8 +33,9 @@ public class Main {
         while(true){
             count += 10;
             
-            spider.movement();
+            bat.movement();
             painter.repaint();
+            System.out.println("x:" + bat.getPosX() + "y: " + bat.getPosY());
             
             Thread.sleep(10);
             
@@ -42,6 +43,7 @@ public class Main {
                 count = 0;
                 toScroll = !toScroll;
                 painter.toScroll(toScroll);
+                System.out.println("Scrolling:" + toScroll);
             }
         }
     }

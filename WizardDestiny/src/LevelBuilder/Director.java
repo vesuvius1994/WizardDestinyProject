@@ -5,6 +5,8 @@
  */
 package LevelBuilder;
 
+import Entities.DynamicEntities.Enemy.EnemyFactory.*;
+import Entities.StaticEntities.ObjectFactory.*;
 import Level.Level;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
@@ -20,8 +22,17 @@ import javax.imageio.ImageIO;
  */
 public class Director {
     
-    public static final int COLTILEMATRIX=6;
-    public static final int ROWTILEMATRIX=6;
+    /*Enemies Factories*/
+    private WerewolfFactory werewolfFactory;
+    private BatFactory batFactory;
+    private SpiderFactory spiderFactory;
+    
+    /*Objects Factories*/
+    private BlockFactory blockFactory;
+    private DiamondFactory diamondFactory;
+    
+    public static final int COLTILEMATRIX=7;
+    public static final int ROWTILEMATRIX=7;
     
     protected Level level;
     
@@ -55,6 +66,13 @@ public class Director {
         this.mapLevelPath = "/Resources/level_1.map";
         this.backgroundPath = "/Resources/bg_double.png";
         this.tileMatrixPath = "/Resources/tileMap.png";
+        
+        this.batFactory = new BatFactory();
+        this.spiderFactory = new SpiderFactory();
+        this.werewolfFactory = new WerewolfFactory();
+        
+        this.blockFactory = new BlockFactory();
+        this.diamondFactory = new DiamondFactory();
         
         this.loadMap(this.mapLevelPath);
         this.loadTile(this.tileMatrixPath);
@@ -130,12 +148,16 @@ public class Director {
                 int x = (int) (j * tileSize);
                 int y = (int) (i * tileSize);
                 
-                if(r == 1 && c == 0){
-                    this.builder.buildEnemy(x, y, tiles[r][c]);
+                if(r == 0 && c == 6){
+                    this.builder.buildEnemy(this.werewolfFactory, x, y, tiles[r][c]);
                 } else if(r == 1 && c == 5){
-                    this.builder.buildDiamond(x, y);
+                    this.builder.buildEnemy(batFactory, x, y, tiles[r][c]);
+                } else if(r == 1 && c == 6){
+                    this.builder.buildEnemy(this.spiderFactory, x, y, tiles[r][c]);
+                } else if(r == 1 && c == 4){
+                    this.builder.buildObject(this.diamondFactory, x, y, tiles[r][c]);
                 } else if(c != 5){
-                    this.builder.buildPlatform(x, y, tiles[r][c]);
+                    this.builder.buildObject(blockFactory, x, y, tiles[r][c]);
                 }
             }
         }

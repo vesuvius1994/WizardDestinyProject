@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package EntityFactory;
+package Entities.StaticEntities.ObjectFactory;
 
 import Entities.StaticEntities.Diamond;
-import Entities.Entity;
+import Entities.StaticEntities.StaticEntity;
 
 /**
  *
- * @author Antonio Dello Russo <a.dellorusso11@studenti.unisa.it>
+ * @author letga
  */
-public class DiamondFactory implements EntityAbstractFactory {
+public class DiamondFactory  implements ObjectFactory{
 
     @Override
-    public Entity createEntity(int posX, int posY) {
+    public StaticEntity createObject(int posX, int posY) {
         return new Diamond(posX, posY);
     }
     

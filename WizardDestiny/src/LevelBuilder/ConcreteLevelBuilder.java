@@ -5,12 +5,10 @@
  */
 package LevelBuilder;
 
-import Entities.DynamicEntities.Enemy;
-import Entities.StaticEntities.Diamond;
-import Entities.StaticEntities.Block;
+import Entities.DynamicEntities.Enemy.EnemyFactory.EnemyAbstractFactory;
+import Entities.StaticEntities.ObjectFactory.ObjectFactory;
 import Level.Background;
 import Level.Level;
-import Sprite.DiamondSprite;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -39,22 +37,15 @@ public class ConcreteLevelBuilder implements LevelBuilder {
     }
     
     @Override
-    public void buildEnemy(int posX, int posY, BufferedImage img) {
-        this.dynamicEntities.add(new Enemy(posX, posY));
+    public void buildEnemy(EnemyAbstractFactory enemyFactory, int posX, int posY, BufferedImage img) {
+        this.dynamicEntities.add(enemyFactory.createEnemy(posX, posY));
         this.dynamicTiles.add(img);
         
     }
 
     @Override
-    public void buildDiamond(int posX, int posY) {
-        this.staticEntities.add(new Diamond(posX, posY));
-        this.staticTiles.add(new DiamondSprite().getSprites());
-        
-    }
-
-    @Override
-    public void buildPlatform(int posX, int posY, BufferedImage img) {
-        this.staticEntities.add(new Block(posX, posY));
+    public void buildObject(ObjectFactory objectFactory, int posX, int posY, BufferedImage img) {
+        this.staticEntities.add(objectFactory.createObject(posX, posY));
         this.staticTiles.add(img);
     }
 
@@ -74,5 +65,10 @@ public class ConcreteLevelBuilder implements LevelBuilder {
         this.dynamicTiles, this.staticTiles, this.bg, this.levelEnd);
         
         return level;
+    }
+
+    @Override
+    public void buildBoss(int posX, int posY, ArrayList<BufferedImage> img) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

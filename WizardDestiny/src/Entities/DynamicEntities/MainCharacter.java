@@ -22,7 +22,6 @@ public class MainCharacter extends DynamicEntity{
     // Character commands
     private SourceCommand command;
     private List<Attack> Attacks;
-    protected MainCharacterHealth health;
     protected Energy energy;
     
     public MainCharacter(int posX, int posY) {
@@ -30,7 +29,7 @@ public class MainCharacter extends DynamicEntity{
         
         this.Attacks = new ArrayList();
         this.command = new SourceCommand();
-        this.health = new MainCharacterHealth(5);
+        this.health = new MainCharacterHealth(this.initializeHealth());
         this.energy = new Energy();
         
         this.setHeight(45);
@@ -65,13 +64,8 @@ public class MainCharacter extends DynamicEntity{
         this.energy.drawEnergy(g2D);
     }
     
-    public MainCharacterHealth getHealth() {
-        return health;
-    }
-    
-    public void decreaseHealth(int damage){
-        int newHealth = this.health.getHealth() - damage;
-        this.health.setHealth(newHealth);
+    public void drawHealth(Graphics2D g2D){
+        this.health.draw(g2D);
     }
 
     public List<Attack> getAttacks() {
@@ -81,5 +75,10 @@ public class MainCharacter extends DynamicEntity{
     @Override
     public void attack() {
         this.Attacks.add(new BasicAttack(this.getPosX(), this.getPosY())); 
+    }
+
+    @Override
+    protected int initializeHealth() {
+        return 5;
     }
 }

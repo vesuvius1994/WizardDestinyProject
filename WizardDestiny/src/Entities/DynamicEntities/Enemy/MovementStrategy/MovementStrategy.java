@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package EntityFactory;
+package Entities.DynamicEntities.Enemy.MovementStrategy;
 
-import Entities.Entity;
+import Entities.DynamicEntities.Enemy.Enemy;
 
 /**
  *
  * @author letga
  */
-public interface EntityAbstractFactory {
+public interface MovementStrategy {
     
-    public Entity createEntity(int posX, int posY);
+    public abstract void execute(Enemy enemy);
 }

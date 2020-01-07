@@ -1,8 +1,11 @@
 package LevelBuilder;
 
 
+import Entities.DynamicEntities.Enemy.EnemyFactory.EnemyAbstractFactory;
+import Entities.StaticEntities.ObjectFactory.ObjectFactory;
 import Level.Level;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -16,11 +19,11 @@ import java.awt.image.BufferedImage;
  */
 public interface LevelBuilder {
     
-    public abstract void buildEnemy(int posX, int posY, BufferedImage img);
+    public abstract void buildEnemy(EnemyAbstractFactory enemyFactory, int posX, int posY, BufferedImage img);
     
-    public abstract void buildDiamond(int posX, int posY);
-    
-    public abstract void buildPlatform(int posX, int posY, BufferedImage img);
+    public abstract void buildBoss(int posX, int posY, ArrayList<BufferedImage> img);
+        
+    public abstract void buildObject(ObjectFactory objectFactory, int posX, int posY, BufferedImage img);
     
     public abstract void buildBackground(String backgroundPathName);
     

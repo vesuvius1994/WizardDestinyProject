@@ -165,4 +165,8 @@ public abstract class Entity {
     public Rectangle getBounds() {
         return new Rectangle(this.posX, this.posY, this.getHeight(), this.getWidth());
     }
+    
+    public void scrollingPosX(int delta){
+        this.setPosX(this.getPosX() - delta);
+    }
 }

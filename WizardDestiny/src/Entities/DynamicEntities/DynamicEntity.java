@@ -5,6 +5,7 @@
  */
 package Entities.DynamicEntities;
 
+import Entities.DynamicEntities.Health.Health;
 import Entities.Entity;
 
 /**
@@ -16,6 +17,9 @@ public abstract class DynamicEntity extends Entity{
     // acceleration
     private int dx = 0;
     private int dy = 3;
+    
+    // dinamyc entity health
+    protected Health health;
     
     public DynamicEntity(int posX, int posY) {
         super(posX, posY);
@@ -50,5 +54,17 @@ public abstract class DynamicEntity extends Entity{
     public void setDy(int dy) {
         this.dy = dy;
     }
+    
+    
+    public int getHealth() {
+        return health.getHealth();
+    }
+    
+    public void decreaseHealth(int damage){
+        int newHealth = this.health.getHealth() - damage;
+        this.health.setHealth(newHealth);
+    }
+
+    protected abstract int initializeHealth(); // hook method
 
 }

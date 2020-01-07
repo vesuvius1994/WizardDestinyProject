@@ -113,7 +113,7 @@ public class Level extends JPanel{
         drawTiles(g2d);
         drawSprite(g2d);
         drawAttacks(g2d);
-        if (mc.getHealth().getHealth() <= 0) {
+        if (mc.getHealth() <= 0) {
             g2d.setFont(new Font("Papyrus", Font.BOLD, 80));
             g2d.setColor(Color.white);
             g2d.drawString("Game Over", 100, 230);
@@ -123,17 +123,13 @@ public class Level extends JPanel{
         Toolkit.getDefaultToolkit().sync();
     }
     
-    protected void collisionDetection(){
-        /*TO BE IMPLEMENTED*/
-    }
-    
     /*When it is invoked, it calls all updating position methods
     *each time the Main Character position is going to be 
     *greater than the HALF_PANEL value.
     *Finally, the Main character position is setted to HALF_PANEL.*/
     protected void scrolling(){
         if(mc.getPosX() > HALF_PANEL && (levelEnd - scrolledPixels ) > (HALF_PANEL * 2)){
-            dxEntity = -2;
+            dxEntity = 2;
             scrolledPixels += 2;
             if(scrolledPixels % 4 == 0){
                 background.update();
@@ -147,14 +143,15 @@ public class Level extends JPanel{
     
     /*It updates all level entities position.*/
     protected void updateEntitiesPosition(){
+        
         for(int i = 0; i < this.staticEntities.size(); i++){
             Entity e = (Entity) this.staticEntities.get(i);
-            e.setPosX(e.getPosX() + this.dxEntity);
+            e.scrollingPosX(this.dxEntity);
         }
         
         for(int i = 0; i < this.dynamicEntities.size(); i++){
             Entity e = (Entity) this.dynamicEntities.get(i);
-            e.setPosX(e.getPosX() + this.dxEntity);
+            e.scrollingPosX(this.dxEntity);
         }
     }
     
@@ -165,7 +162,7 @@ public class Level extends JPanel{
     }
     
     protected void drawSprite(Graphics2D g2d){
-        mc.getHealth().draw(g2d);
+        mc.drawHealth(g2d);
         mc.drawEnergy(g2d);
         BufferedImage[] action=mcs.getSprites(mc.getState());
         for(int i=0;i<action.length;i++)
@@ -197,7 +194,11 @@ public class Level extends JPanel{
         return this.dynamicEntities;
     }
     
-    public void incrementScore(){
-        this.score.setScore(score.getScore() + 5);
+    public void incrementScore(int value){
+        this.score.setScore(score.getScore() + value);
+    }
+    
+    public void removeTile(int index){
+        this.dynamicTiles.remove(index);
     }
 }

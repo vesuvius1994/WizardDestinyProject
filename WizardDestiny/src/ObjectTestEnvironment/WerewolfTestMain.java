@@ -6,21 +6,22 @@
 package ObjectTestEnvironment;
 
 import Entities.DynamicEntities.Enemy.Spider;
+import Entities.DynamicEntities.Enemy.Werewolf;
 import javax.swing.JFrame;
 
 /**
  *
  * @author letga
  */
-public class Main {
+public class WerewolfTestMain {
     
     public static void main(String[] args) throws InterruptedException{
         long count = 0;
         boolean toScroll = false;
         
-        Spider spider = new Spider(500, 70);
+        Werewolf werewolf = new Werewolf(500, 70);
         
-        ObjectPainter painter = new ObjectPainter(spider, toScroll);
+        ObjectPainter painter = new ObjectPainter(werewolf, toScroll);
         
         JFrame testFrame = new JFrame("Object Test Environment");
         testFrame.setSize(630, 508);
@@ -33,16 +34,19 @@ public class Main {
         while(true){
             count += 10;
             
-            spider.movement();
+            werewolf.movement();
             painter.repaint();
+            System.out.println(werewolf.getPosX());
             
             Thread.sleep(10);
             
-            if(count == 2000){
+            if(count == 1500){
                 count = 0;
                 toScroll = !toScroll;
                 painter.toScroll(toScroll);
+                System.out.println("Scrolling:" + toScroll);
             }
         }
     }
+    
 }

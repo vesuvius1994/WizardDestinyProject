@@ -6,7 +6,7 @@
 package Level;
 
 import Entities.DynamicEntities.Enemy;
-import Entities.DynamicEntities.Werewolf;
+import Entities.DynamicEntities.Enemy.Werewolf;
 import Entities.Entity;
 import Entities.StaticEntities.Diamond;
 import Sprite.DiamondSprite;

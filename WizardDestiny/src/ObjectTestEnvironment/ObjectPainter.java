@@ -38,7 +38,7 @@ public class ObjectPainter extends JPanel{
     }
     
     private void scroll(){
-        object.setPosX(object.getPosX() - 1);
+        object.scrollingPosX(1);
     }
     
     public void toScroll(boolean isScrolling){

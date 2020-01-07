@@ -62,4 +62,9 @@ public abstract class Attack extends DynamicEntity {
     public abstract String attackFileName(); // hook method, implement it to introduce new type of attack
     public abstract int attackSpeed();   // hook method to set attack speed
     public abstract int setStrength(); //hook method to set attack type
+    
+    @Override
+    protected int initializeHealth(){
+        return 0;
+    }
 }

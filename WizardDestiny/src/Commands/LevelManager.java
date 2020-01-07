@@ -10,6 +10,7 @@ import javax.swing.Timer;
 
 import Entities.DynamicEntities.*;
 import Entities.DynamicEntities.Attacks.Attack;
+import Entities.DynamicEntities.Enemy.Enemy;
 import Entities.Entity;
 import Entities.StaticEntities.Block;
 import Entities.StaticEntities.Diamond;
@@ -61,7 +62,7 @@ public class LevelManager implements ActionListener{
         this.isWalkingRight = false;
         this.isWalkingLeft = false;
         this.isAttacking = false;
-        this.isFalling = false;
+        this.isFalling = true;
         this.sound = new Sound();
         
     }
@@ -82,6 +83,7 @@ public class LevelManager implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         //move all entities
         this.mc.movement();
+        this.moveDynamicEntities(this.level.getDynamicEntities());
         
         updateAttacks();
         
@@ -90,6 +92,14 @@ public class LevelManager implements ActionListener{
                 
         this.level.repaint();
         //refresh tile of Main Character
+    }
+    
+    private void moveDynamicEntities(ArrayList<Entity> dynamicEntities){
+    
+        for(int i = 0; i < dynamicEntities.size(); i++){
+            Enemy e = (Enemy) dynamicEntities.get(i);
+            e.movement();
+        }
     }
     
     /**
@@ -109,8 +119,8 @@ public class LevelManager implements ActionListener{
     
     private void attackCollisionDetection(ArrayList<Entity> dynamicEntities,
             ArrayList<Entity> staticEntities, Attack attack){
-        
-        for(int i = 0; i < dynamicEntities.size(); i++){
+        int i = 0;
+        while(i < dynamicEntities.size()){
             Enemy enemy = (Enemy) dynamicEntities.get(i);
             
             if(enemy.getBounds().intersects(attack.getBounds())){
@@ -120,15 +130,23 @@ public class LevelManager implements ActionListener{
                     !((attack.getPosY() + attack.getHeight()) < enemy.getPosY())) {
                     
                     attack.setPosY(-100);
-                    if(enemy.getHealth() - attack.getStrength() <= 0)
-                        enemy.setPosX(-100);
-                    else
-                        enemy.setHealth(enemy.getHealth() - attack.getStrength());
+                    if(enemy.getHealth() - attack.getStrength() <= 0){
+                        dynamicEntities.remove(i);
+                        this.level.removeTile(i);
+                        this.level.incrementScore(3);
+                    }
+                    else{
+                        enemy.decreaseHealth(attack.getStrength());
+                        i++;
+                    }
                 }
+                i++;
+            } else {
+                i++;
             }
         }
         
-        for(int i = 0; i < staticEntities.size(); i++){
+        for(i = 0; i < staticEntities.size(); i++){
             if (staticEntities.get(i) instanceof Block 
                 && staticEntities.get(i).getBounds().intersects(attack.getBounds())) {
                 Block block = (Block) staticEntities.get(i);
@@ -182,7 +200,7 @@ public class LevelManager implements ActionListener{
                 }
             } else if(staticEntities.get(i) instanceof Diamond && 
                     staticEntities.get(i).getBounds().intersects(mc.getBounds())){
-                this.level.incrementScore();
+                this.level.incrementScore(5);
                 staticEntities.get(i).setPosX(-200);
                 sound.playClip("src/Resources/SoundPack/sfx_diamond.wav");
                 
@@ -200,7 +218,7 @@ public class LevelManager implements ActionListener{
                         (isJumping &&
                          mc.getPosX() < enemy.getPosX() &&
                         (mc.getPosX() + mc.getWidth() > enemy.getPosX()))){
-                    mc.setPosX(enemy.getPosX() - mc.getWidth() - enemy.getWidth());
+                    mc.setPosX(enemy.getPosX() - (mc.getWidth() * 2) - enemy.getWidth());
                     mc.setDx(0);
                     mc.setState(Entity.States.IDLE);
                     isWalkingRight = false;
@@ -209,7 +227,7 @@ public class LevelManager implements ActionListener{
                         mc.getPosX() < (enemy.getPosX() + enemy.getWidth()) &&
                         (mc.getPosX() + mc.getWidth()) > 
                         (enemy.getPosX() + enemy.getWidth()))){
-                    mc.setPosX(enemy.getPosX() + enemy.getWidth() + mc.getWidth());
+                    mc.setPosX(enemy.getPosX() + enemy.getWidth() + (mc.getWidth() * 2));
                     mc.setDx(0);
                     mc.setState(Entity.States.IDLE);
                     isWalkingLeft = false;
@@ -218,7 +236,7 @@ public class LevelManager implements ActionListener{
         }
         
         if(mc.getPosY() > 530){
-            mc.getHealth().setHealth(0);
+            mc.decreaseHealth(mc.getHealth());
         }
         
     }
