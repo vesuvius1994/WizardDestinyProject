@@ -18,14 +18,14 @@ public abstract class Attack extends DynamicEntity {
 
     private Image img;
     private boolean visible;
-    private String attackType;
+    private int strength;
     
     public Attack(int posX, int posY) {
         super(posX, posY);
         this.setHeight(45);
         this.setWidth(45);
         this.attack();
-        this.attackType = attackType();
+        this.strength = setStrength();
         this.visible = true;
         
     }
@@ -55,11 +55,11 @@ public abstract class Attack extends DynamicEntity {
             this.visible = false;
     }
 
-    public String getAttackType() {
-        return attackType;
+    public int getStrength() {
+        return strength;
     }
 
     public abstract String attackFileName(); // hook method, implement it to introduce new type of attack
     public abstract int attackSpeed();   // hook method to set attack speed
-    public abstract String attackType(); //hook method to set attack type
+    public abstract int setStrength(); //hook method to set attack type
 }

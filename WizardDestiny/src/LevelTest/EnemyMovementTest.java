@@ -6,7 +6,6 @@
 package LevelTest;
 
 import Commands.LevelManager;
-import Entities.DynamicEntities.Enemy;
 import Entities.DynamicEntities.Werewolf;
 import Level.Level;
 import java.awt.event.ActionEvent;

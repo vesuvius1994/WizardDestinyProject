@@ -28,16 +28,20 @@ import java.util.List;
  */
 public class LevelManager implements ActionListener{
     
-    private MainCharacter mc;
+    private final MainCharacter mc;
     protected Level level;
     
     /*It is used to manage the ActionListener Thread.*/
     private Timer timer;
     
     /*Variables used to manage Main Character jump action.*/
-    private long jumpingTime;
+    private final long jumpingTime;
     private boolean isJumping;
-    
+    private boolean isWalkingRight;
+    private boolean isWalkingLeft;
+    private boolean isAttacking;
+    private boolean isFalling;
+        
     /**
      * Constructor of the Class.It takes the Main Character and Level objects as input.
      * It instantiates EventListener and Timer objects.
@@ -50,6 +54,11 @@ public class LevelManager implements ActionListener{
         this.level.setFocusable(true);
         this.jumpingTime = 400;
         this.isJumping = false;
+        this.isWalkingRight = false;
+        this.isWalkingLeft = false;
+        this.isAttacking = false;
+        this.isFalling = false;
+        
     }
     
     /**
@@ -68,9 +77,12 @@ public class LevelManager implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         //move all entities
         this.mc.movement();
+        
         updateAttacks();
+        
         this.collisionDetection(this.level.getDynamicEntities(), 
                 this.level.getStaticEntities());
+                
         this.level.repaint();
         //refresh tile of Main Character
     }
@@ -95,91 +107,117 @@ public class LevelManager implements ActionListener{
         
         for(int i = 0; i < dynamicEntities.size(); i++){
             Enemy enemy = (Enemy) dynamicEntities.get(i);
+            
             if(enemy.getBounds().intersects(attack.getBounds())){
-            if ((attack.getPosX() + attack.getWidth()) >= enemy.getPosX() &&
-                    attack.getPosX() < enemy.getPosX() &&
-                     attack.getPosY() <= (enemy.getPosY() + 30) 
-                    & attack.getPosY() > enemy.getPosY()) {
-                //non posso andare a destra
-                attack.setPosY(-100);
-                enemy.setPosX(-10);
+                
+                if (attack.getPosX() < (enemy.getPosX() + enemy.getWidth()) &&
+                    attack.getPosX() >= enemy.getPosX() &&
+                    !((attack.getPosY() + attack.getHeight()) < enemy.getPosY())) {
+                    
+                    attack.setPosY(-100);
+                    if(enemy.getHealth() - attack.getStrength() <= 0)
+                        enemy.setPosX(-100);
+                    else
+                        enemy.setHealth(enemy.getHealth() - attack.getStrength());
+                }
             }
-        }
         }
         
         for(int i = 0; i < staticEntities.size(); i++){
             if (staticEntities.get(i) instanceof Block 
                 && staticEntities.get(i).getBounds().intersects(attack.getBounds())) {
                 Block block = (Block) staticEntities.get(i);
+                
                 if ((attack.getPosX() + attack.getWidth()) >= block.getPosX() &&
                     attack.getPosX() < block.getPosX() &&
-                     attack.getPosY() <= (block.getPosY() + 30) 
+                     attack.getPosY() <= (block.getPosY() + block.getHeight()) 
                     & attack.getPosY() > block.getPosY()) {
-                //non posso andare a destra
-                attack.setPosY(-100);
-            }
+                    
+                    attack.setPosY(-100);
+                }
             }
         }
     }
-    private void collisionDetection(ArrayList<Entity> dynamicEntities, 
+    
+    private void collisionDetection(ArrayList<Entity> dynamicEntities,
             ArrayList<Entity> staticEntities){
         
         for(int i = 0; i < staticEntities.size(); i++){
-             /*Intersazione lato destro di un blocco*/ 
-        if (staticEntities.get(i) instanceof Block 
-                && staticEntities.get(i).getBounds().intersects(this.mc.getBounds())) {
-            //sto intersecando il lato sinistro della tile
-            Block block = (Block) staticEntities.get(i);
-            if ((mc.getPosX() + mc.getWidth()) >= block.getPosX() &&
-                    mc.getPosX() < block.getPosX() &&
-                    mc.getPosY() <= (block.getPosY() + 30) &&
-                    mc.getPosY() > block.getPosY()) {
-                //non posso andare a destra
-                mc.setPosX(block.getPosX() - mc.getWidth());
-            }
-            //sto intersecando il lato inferiore della tile
-            else if ((mc.getPosX() + mc.getWidth()) < (block.getPosX() + 30) 
-                    & (mc.getPosX() + mc.getWidth()) > block.getPosX() 
-                    & mc.getPosY() < (block.getPosY() + block.getHeight())) {
-                //stop jumping
-                mc.setPosY(block.getPosY() + block.getHeight());
-            } 
-            //sto intersecando il lato destro della tile
-            else if (mc.getPosX() <= (block.getPosX() + 30) &&
-                    (mc.getPosX() + mc.getWidth()) > (block.getPosX() + block.getWidth())
-                    & mc.getPosY() <= (block.getPosY() + 30) 
-                    & mc.getPosY() > block.getPosY()) {
-                //non posso andare a sinistra
-                mc.setPosX(block.getPosX() + block.getWidth());
-            }
-            //sto intersecando il lato superiore della tile
-            else {
-                //stop falling
-                mc.setPosY(block.getPosY() - mc.getHeight());
-            }
-        } else if (staticEntities.get(i) instanceof Diamond 
-                && staticEntities.get(i).getBounds().intersects(this.mc.getBounds())) {
-            this.level.incrementScore();
-            staticEntities.get(i).setPosX(-10);
-       }
-    }
-    //collision between main character and enemies
-        for (int i = 0; i < dynamicEntities.size(); i++) {
-            if (dynamicEntities.get(i) instanceof Enemy
-                    && dynamicEntities.get(i).getBounds().intersects(this.mc.getBounds())) {
-                Enemy enemy = (Enemy) dynamicEntities.get(i);
-                if(mc.getHealth().getHealth() > 0 &&
-                        (mc.getPosX() + mc.getWidth()) >= enemy.getPosX() &&
-                        mc.getPosX() < enemy.getPosX() &&
-                        !((mc.getPosY() + mc.getHeight()) < enemy.getPosY())){
-                    mc.setPosX(mc.getPosX() - 40);
-                    mc.getHealth().setHealth(mc.getHealth().getHealth() - 1);
+            if(staticEntities.get(i) instanceof Block && 
+                    staticEntities.get(i).getBounds().intersects(mc.getBounds())){
+                Block block = (Block) staticEntities.get(i);
+                
+             if((mc.getPosY() + mc.getHeight()) > block.getPosY() &&
+                     mc.getPosY() < block.getPosY()){
+                 mc.setPosY(block.getPosY() - mc.getHeight());
+                 isFalling = false;
+                 isJumping = false;
+            } else if(isJumping && 
+                        mc.getPosY() < (block.getPosY() + block.getHeight())){
+                    mc.setPosY(block.getPosY() + block.getHeight() + 3);
+                    mc.setDy(3);
+                    mc.setState(Entity.States.FALLING);
+                    isFalling = true;
+                    isJumping = false;
+                } else if(isWalkingRight &&
+                        (mc.getPosX() + mc.getWidth()) > block.getPosX()){
+                    mc.setPosX(block.getPosX() - mc.getWidth());
+                    mc.setDx(0);
+                    isWalkingRight = false;
+                    mc.setState(Entity.States.IDLE);
+                } else if(isWalkingLeft &&
+                        mc.getPosX() < (block.getPosX() + block.getWidth())){
+                    mc.setPosX(block.getPosX() + block.getWidth());
+                    mc.setDx(0);
+                    isWalkingLeft = false;
+                    mc.setState(Entity.States.IDLE);
                 }
+            } else if(staticEntities.get(i) instanceof Diamond && 
+                    staticEntities.get(i).getBounds().intersects(mc.getBounds())){
+                this.level.incrementScore();
+                staticEntities.get(i).setPosX(-200);
+                
             }
-
         }
-}
-    
+        
+        for(int i = 0; i < dynamicEntities.size(); i++){
+            Enemy enemy = (Enemy) dynamicEntities.get(i);
+            
+            if(enemy.getBounds().intersects(mc.getBounds())){
+                mc.decreaseHealth(1);
+                
+                if(isWalkingRight ||
+                        (isJumping &&
+                         mc.getPosX() < enemy.getPosX() &&
+                        (mc.getPosX() + mc.getWidth() > enemy.getPosX()))){
+                    mc.setPosX(enemy.getPosX() - mc.getWidth() - enemy.getWidth());
+                    mc.setDx(0);
+                    mc.setState(Entity.States.IDLE);
+                    isWalkingRight = false;
+                } else if(isWalkingLeft ||
+                        (isJumping &&
+                        mc.getPosX() < (enemy.getPosX() + enemy.getWidth()) &&
+                        (mc.getPosX() + mc.getWidth()) > 
+                        (enemy.getPosX() + enemy.getWidth()))){
+                    mc.setPosX(enemy.getPosX() + enemy.getWidth() + mc.getWidth());
+                    mc.setDx(0);
+                    mc.setState(Entity.States.IDLE);
+                    isWalkingLeft = false;
+                } 
+            }
+        }
+        
+        if(mc.getPosY() > 530){
+            mc.setState(Entity.States.FALLING);
+            mc.getHealth().setHealth(mc.getHealth().getHealth()-1);
+            mc.setPosX(0);
+            mc.setPosY(0);
+        }
+        
+        
+        
+    }
+
     /**
      * It handles all inputs given by the Player.
      */
@@ -192,18 +230,21 @@ public class LevelManager implements ActionListener{
             if(key == mc.getCommand().getDx()){
                 mc.setDx(2);
                 mc.setState(Entity.States.WALKING);
+                isWalkingRight = true;
             } else if(key == mc.getCommand().getSx()){
                 mc.setDx(-2);
                 mc.setState(Entity.States.WALKING);
-            } else if(key == mc.getCommand().getJump() && !isJumping){
+                isWalkingLeft = true;
+            } else if(key == mc.getCommand().getJump() && !isJumping && !isFalling){
                 new Thread(new JumpManagementThread()).start();
-            } else if(key == mc.getCommand().getAttackB()){
+            } else if(!isAttacking && key == mc.getCommand().getAttackB()){
+                isAttacking = true;
                 mc.setState(Entity.States.ATTACKING);
                 mc.attack();
-            } else if(key == mc.getCommand().getAttackS() && mc.getEnergy() > 0){
+            } else if(!isAttacking && key == mc.getCommand().getAttackS()){
+                isAttacking = true;
                 mc.setState(Entity.States.S_ATTACKING);
                 mc.specialAttack();
-                mc.decreaseEnergy();
             }
             
         }
@@ -222,9 +263,12 @@ public class LevelManager implements ActionListener{
                     || key == mc.getCommand().getSx()){
                 mc.setDx(0);
                 mc.setState(Entity.States.IDLE);
+                isWalkingRight = false;
+                isWalkingLeft = false;
             }
             if(key == mc.getCommand().getAttackS() 
                     || key == mc.getCommand().getAttackB()){
+                isAttacking = false;
                 mc.setState(Entity.States.IDLE);
             }
         }
@@ -243,14 +287,14 @@ public class LevelManager implements ActionListener{
                 mc.setDy(-3);
                 Thread.sleep(jumpingTime);
                 mc.setDy(3);
+                mc.setState(Entity.States.FALLING);
+                isFalling = true;
                 Thread.sleep(jumpingTime);
-                //mc.setDy(0);
                 isJumping = false;
                 mc.setState(Entity.States.IDLE);
             }catch(InterruptedException e){
                 System.exit(0);
             }
-        }
-        
+        }   
     }
 }

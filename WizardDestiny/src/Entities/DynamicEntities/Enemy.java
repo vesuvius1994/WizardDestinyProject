@@ -5,6 +5,7 @@
  */
 package Entities.DynamicEntities;
 
+import Entities.DynamicEntities.Health.*;
 import java.awt.image.BufferedImage;
 
 /**
@@ -20,17 +21,27 @@ public class Enemy extends DynamicEntity{
     private boolean leftbound;
     private int deltaxright= deltax + 450;
     private int deltaxleft= 450 - deltax;
+    private Health health;
 
     public Enemy(int posX, int posY) {
         super(posX, posY);
-        this.setHeight(45);
-        this.setWidth(45);
+        this.setHeight(30);
+        this.setWidth(30);
+        this.health = new EnemyHealth(3);
         this.leftbound=false;
         this.rightbound=false;
         
-        this.spawnx= 450;
+        this.spawnx= posX;
     }
 
+    public int getHealth() {
+        return this.health.getHealth();
+    }
+
+    public void setHealth(int health) {
+        this.health.setHealth(health);
+    }
+    
     @Override
     public void attack() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

@@ -26,8 +26,8 @@ public class SpecialAttack extends Attack{
     }
 
     @Override
-    public String attackType() {
-        return "Special";
+    public int setStrength() {
+        return 3;
     }
       
 }

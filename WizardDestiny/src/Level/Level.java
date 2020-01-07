@@ -105,11 +105,8 @@ public class Level extends JPanel{
         super.paint(g);
         
         Graphics2D g2d = (Graphics2D) g;
-                
-        //To test without if statement.
-        if(background != null){
-            background.draw(g2d);
-        }
+        
+        background.draw(g2d);
         
         scrolling();
         
@@ -169,6 +166,7 @@ public class Level extends JPanel{
     
     protected void drawSprite(Graphics2D g2d){
         mc.getHealth().draw(g2d);
+        mc.drawEnergy(g2d);
         BufferedImage[] action=mcs.getSprites(mc.getState());
         for(int i=0;i<action.length;i++)
             g2d.drawImage(action[i],mc.getPosX(),mc.getPosY(),mc.getWidth(),mc.getHeight(),null);

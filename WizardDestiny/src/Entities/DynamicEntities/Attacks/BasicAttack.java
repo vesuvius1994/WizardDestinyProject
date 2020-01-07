@@ -26,8 +26,8 @@ public class BasicAttack extends Attack{
     }
 
     @Override
-    public String attackType() {
-        return "Basic";
+    public int setStrength() {
+        return 1;
     }
     
     

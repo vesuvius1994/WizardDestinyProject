@@ -5,6 +5,7 @@
  */
 package Entities.DynamicEntities;
 
+import Entities.DynamicEntities.Health.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -20,6 +21,7 @@ public class Werewolf extends DynamicEntity {
     private int leftBound;
     private boolean backward = false;
     private BufferedImage img;
+    private Health health;
 
     public Werewolf(int posX, int posY) {
         super(posX, posY);
@@ -34,10 +36,14 @@ public class Werewolf extends DynamicEntity {
             System.out.println("sto in errore");
         }
         
+        health = new EnemyHealth(2);
+        
         this.setWidth(45);
         this.setHeight(45);
     }
 
+    
+    
     @Override
     public void movement(){
         this.rightBound += this.getDx();

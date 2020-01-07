@@ -29,7 +29,8 @@ public abstract class Health {
      * @param health new value of health
      */
     public void setHealth(int health) {
-        this.health = health;
+        if(health >= 0)
+            this.health = health;
     }
 
     public abstract void draw(Graphics2D g2d);
