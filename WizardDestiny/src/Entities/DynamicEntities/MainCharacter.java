@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author Jonathan De Maio <j.demaio1@studenti.unisa.it>
+ *This class represents the controllable DynamicEntity Main Character.
+ * @author Crazy Monkey Software House
  */
 public class MainCharacter extends DynamicEntity{
     
@@ -24,6 +24,15 @@ public class MainCharacter extends DynamicEntity{
     private List<Attack> Attacks;
     protected Energy energy;
     
+    /**
+     * Main Character class constructor.
+     * It initializes the Main Character initial position with
+     * two ints given as inputs.
+     * It also instantiates SourceCommand, List and Energy objects.
+     * 
+     * @param posX int
+     * @param posY int
+     */
     public MainCharacter(int posX, int posY) {
         super(posX, posY);
         
@@ -49,10 +58,17 @@ public class MainCharacter extends DynamicEntity{
         }
     }
 
+    /**
+     * It returns the SourceCommand object.
+     * @return SourceCommand
+     */
     public SourceCommand getCommand() {
         return command;
     }
     
+    /**
+     * It manages the Special Attack Event.
+     */
     public void specialAttack(){
         if(this.energy.isReducible()){
             this.Attacks.add(new SpecialAttack(this.getPosX(), this.getPosY()));
@@ -60,14 +76,26 @@ public class MainCharacter extends DynamicEntity{
         }
     }
     
+    /**
+     * It invokes the drawEnergy method on the Energy object.
+     * @param g2D Graphics2D
+     */
     public void drawEnergy(Graphics2D g2D){
         this.energy.drawEnergy(g2D);
     }
     
+    /**
+     * It invokes the draw method on the Energy object.
+     * @param g2D Graphics2D
+     */
     public void drawHealth(Graphics2D g2D){
         this.health.draw(g2D);
     }
 
+    /**
+     * It returns the List object containing Attack Entities.
+     * @return 
+     */
     public List<Attack> getAttacks() {
         return Attacks;
     }

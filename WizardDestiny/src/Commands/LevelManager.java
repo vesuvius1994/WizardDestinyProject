@@ -22,34 +22,36 @@ import java.util.List;
 
 /**
  * This Class manages controls input given by the Player.
- * It handles all events related to pressed keys.
+ * It handles all gameplay events.
  *
- * N.B. Bisogna gestire il ritorno dallo stato ATTACK 
- * a quello di IDLE.
- * @author letga
+ * @author Crazy Monkey Software House
  */
 public class LevelManager implements ActionListener{
     
+    
     private final MainCharacter mc;
+    
     protected Level level;
     
     /*It is used to manage the ActionListener Thread.*/
     private Timer timer;
     
-    /*Variables used to manage Main Character jump action.*/
+    /*Variables used to track Main Character states.*/
     private final long jumpingTime;
     private boolean isJumping;
     private boolean isWalkingRight;
     private boolean isWalkingLeft;
     private boolean isAttacking;
     private boolean isFalling;
+    private boolean isIdle;
     
+    /*Instance of the class Sound.*/
     private Sound sound;
 
         
     /**
-     * Constructor of the Class.It takes the Main Character and Level objects as input.
-     * It instantiates EventListener and Timer objects.
+     *It instantiates all class attributes.
+     * 
      * @param level
      */
     public LevelManager(Level level){
@@ -63,12 +65,14 @@ public class LevelManager implements ActionListener{
         this.isWalkingLeft = false;
         this.isAttacking = false;
         this.isFalling = true;
+        this.isIdle = true;
+        
         this.sound = new Sound();
         
     }
     
     /**
-     * It instantiates a Timer object.
+     * It instantiates and starts a Timer object.
     */
     public void startListener(){
         this.timer = new Timer(10, this);
@@ -76,8 +80,9 @@ public class LevelManager implements ActionListener{
     }
     
     /**
-     * It updates the Main Character position
-     * and Level Panel.
+     * It enables all level entities to move
+     * and controls all their possible interactions.
+     * Finally, it updates the Panel state.
      */
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -94,6 +99,10 @@ public class LevelManager implements ActionListener{
         //refresh tile of Main Character
     }
     
+    /**
+     * It invokes the movement method of level dynamic entities.
+     * @param dynamicEntities 
+     */
     private void moveDynamicEntities(ArrayList<Entity> dynamicEntities){
     
         for(int i = 0; i < dynamicEntities.size(); i++){
@@ -103,7 +112,7 @@ public class LevelManager implements ActionListener{
     }
     
     /**
-     * Update Main Character attacks
+     * It updates the Attack entities positions.
      */
     private void updateAttacks(){
         List<Attack> Attacks = mc.getAttacks();
@@ -117,6 +126,14 @@ public class LevelManager implements ActionListener{
         }
     }
     
+    /**
+     * It checks and manages all collision between an Attack entity
+     * and all other level entities.
+     * 
+     * @param dynamicEntities
+     * @param staticEntities
+     * @param attack 
+     */
     private void attackCollisionDetection(ArrayList<Entity> dynamicEntities,
             ArrayList<Entity> staticEntities, Attack attack){
         int i = 0;
@@ -162,6 +179,13 @@ public class LevelManager implements ActionListener{
         }
     }
     
+    /**
+     * It checks and manages all interactions between the Main Character
+     * and all other level entities.
+     * 
+     * @param dynamicEntities
+     * @param staticEntities 
+     */
     private void collisionDetection(ArrayList<Entity> dynamicEntities,
             ArrayList<Entity> staticEntities){
         
@@ -214,7 +238,7 @@ public class LevelManager implements ActionListener{
             if(enemy.getBounds().intersects(mc.getBounds())){
                 mc.decreaseHealth(1);
                 sound.playClip("src/Resources/SoundPack/sfx_impact.wav");
-                if(isWalkingRight ||
+                if(isWalkingRight || isIdle ||
                         (isJumping &&
                          mc.getPosX() < enemy.getPosX() &&
                         (mc.getPosX() + mc.getWidth() > enemy.getPosX()))){

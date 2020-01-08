@@ -8,11 +8,12 @@ package Entities.DynamicEntities.Enemy;
 import Entities.DynamicEntities.Enemy.MovementStrategy.WerewolfMovementStrategy;
 
 /**
- *
- * @author letga
+ *This class represents the Enemy DynamicEntity Werewolf.
+ * @author Crazy Monkey SOftware House
  */
 public class Werewolf extends Enemy {
     
+    /*Movement range bounds on the axys X.*/
     private int rightBound;
     private int leftBound;
     
@@ -34,10 +35,18 @@ public class Werewolf extends Enemy {
         this.leftBound -= delta;
     }
     
+    /**
+     * It returns the right bound on the axys X.
+     * @return int
+     */
     public int getRightBound(){
         return this.rightBound;
     }
     
+    /**
+     * It returns the left bound on the axys X.
+     * @return int
+     */
     public int getLeftBound(){
         return this.leftBound;
     }

@@ -8,11 +8,12 @@ package Entities.DynamicEntities.Enemy;
 import Entities.DynamicEntities.Enemy.MovementStrategy.SpiderMovementStrategy;
 
 /**
- *
- * @author letga
+ * This class represents the Enemy DynamicEntity Spider.
+ * @author Crazy Monkey Software House
  */
 public class Spider extends Enemy {
     
+    /*Initial position on axys Y.*/
     private int spawnY;
 
     public Spider(int posX, int posY) {
@@ -39,6 +40,10 @@ public class Spider extends Enemy {
         this.context.setStrategy(new SpiderMovementStrategy());
     }
     
+    /**
+     * It returns the spawn position on the axys Y.
+     * @return int
+     */
     public int getSpawnY(){
         return this.spawnY;
     }

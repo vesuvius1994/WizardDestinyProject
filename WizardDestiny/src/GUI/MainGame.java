@@ -54,7 +54,9 @@ public class MainGame extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Papyrus", 1, 24)); // NOI18N
         jLabel2.setText("Wizard Destiny");
 
-        jButtonStart.setBackground(new java.awt.Color(204, 204, 0));
+        jButtonStart.setBackground(new java.awt.Color(0, 66, 0));
+        jButtonStart.setFont(new java.awt.Font("Papyrus", 1, 13)); // NOI18N
+        jButtonStart.setForeground(new java.awt.Color(255, 255, 255));
         jButtonStart.setText("Start");
         jButtonStart.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -62,7 +64,9 @@ public class MainGame extends javax.swing.JFrame {
             }
         });
 
-        jButtonSetting.setBackground(new java.awt.Color(204, 204, 0));
+        jButtonSetting.setBackground(new java.awt.Color(0, 66, 0));
+        jButtonSetting.setFont(new java.awt.Font("Papyrus", 1, 13)); // NOI18N
+        jButtonSetting.setForeground(new java.awt.Color(255, 255, 255));
         jButtonSetting.setText("Setting");
         jButtonSetting.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -70,7 +74,9 @@ public class MainGame extends javax.swing.JFrame {
             }
         });
 
-        JButtonExit.setBackground(new java.awt.Color(204, 204, 0));
+        JButtonExit.setBackground(new java.awt.Color(0, 66, 0));
+        JButtonExit.setFont(new java.awt.Font("Papyrus", 1, 13)); // NOI18N
+        JButtonExit.setForeground(new java.awt.Color(255, 255, 255));
         JButtonExit.setText("Exit");
         JButtonExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

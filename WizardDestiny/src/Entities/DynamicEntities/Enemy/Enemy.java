@@ -10,11 +10,13 @@ import Entities.DynamicEntities.Enemy.MovementStrategy.MovementContext;
 import Entities.DynamicEntities.Health.EnemyHealth;
 
 /**
- *
- * @author letga
+ *This class represents a common interface for all dynamic entities Enemy.
+ * It also contains common code blocks used by all entity Enemy.
+ * @author Crazy Monkey Software House
  */
 public abstract class Enemy extends DynamicEntity{
     
+    /*MovementContext instance.*/
     protected MovementContext context;
 
     public Enemy(int posX, int posY) {
@@ -30,6 +32,9 @@ public abstract class Enemy extends DynamicEntity{
         this.context.makeMeMove(this);
     }
     
+    /**
+     * It passes a MovementStrategy object to the MovementContext instance.
+     */
     protected abstract void setStrategy();
     
 }

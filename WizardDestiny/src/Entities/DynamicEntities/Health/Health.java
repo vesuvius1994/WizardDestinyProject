@@ -3,13 +3,19 @@ package Entities.DynamicEntities.Health;
 import java.awt.Graphics2D;
 
 /**
- *
- * @author Silvio Maria Amato
+ *This class represents the health system of an Entity.
+ * @author Crazy Monkey Software House
  */
 public abstract class Health {
 
-    private int health = 0;
+    /*Current health value.*/
+    private int health;
 
+    /**
+     * Health class constructor.
+     * It initializes the health variable with a given int input.
+     * @param health int
+     */
     public Health(int health) {
         this.health = health;
     }
@@ -33,6 +39,11 @@ public abstract class Health {
             this.health = health;
     }
 
+    /**
+     * It uses a Graphics2D object to draw the current health value
+     * on a Component.
+     * @param g2d Graphics2D
+     */
     public abstract void draw(Graphics2D g2d);
 
 }

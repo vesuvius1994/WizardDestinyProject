@@ -75,8 +75,10 @@ public class guiCommand extends javax.swing.JFrame {
         labelSpecialAttack = new java.awt.Label();
         button1 = new java.awt.Button();
         btnRestore = new java.awt.Button();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         textJump.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         textJump.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -87,8 +89,11 @@ public class guiCommand extends javax.swing.JFrame {
                 textJumpKeyTyped(evt);
             }
         });
+        getContentPane().add(textJump, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 118, -1));
 
+        labelJump.setFont(new java.awt.Font("Papyrus", 1, 13)); // NOI18N
         labelJump.setText("Jump");
+        getContentPane().add(labelJump, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, -1, -1));
 
         textDx.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         textDx.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -99,8 +104,11 @@ public class guiCommand extends javax.swing.JFrame {
                 textDxKeyTyped(evt);
             }
         });
+        getContentPane().add(textDx, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 118, -1));
 
+        labelDx.setFont(new java.awt.Font("Papyrus", 1, 13)); // NOI18N
         labelDx.setText("Dx");
+        getContentPane().add(labelDx, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, -1, -1));
 
         textSx.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         textSx.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -111,8 +119,11 @@ public class guiCommand extends javax.swing.JFrame {
                 textSxKeyTyped(evt);
             }
         });
+        getContentPane().add(textSx, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, 118, -1));
 
+        labelSx.setFont(new java.awt.Font("Papyrus", 1, 13)); // NOI18N
         labelSx.setText("Sx");
+        getContentPane().add(labelSx, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, -1, 20));
 
         textBasicAttack.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         textBasicAttack.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -123,8 +134,11 @@ public class guiCommand extends javax.swing.JFrame {
                 textBasicAttackKeyTyped(evt);
             }
         });
+        getContentPane().add(textBasicAttack, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 118, -1));
 
+        labelAttack_b.setFont(new java.awt.Font("Papyrus", 1, 13)); // NOI18N
         labelAttack_b.setText("Basic Attack");
+        getContentPane().add(labelAttack_b, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, -1, -1));
 
         textSpecialAttack.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         textSpecialAttack.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -135,89 +149,37 @@ public class guiCommand extends javax.swing.JFrame {
                 textSpecialAttackKeyTyped(evt);
             }
         });
+        getContentPane().add(textSpecialAttack, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 118, -1));
 
+        labelSpecialAttack.setFont(new java.awt.Font("Papyrus", 1, 13)); // NOI18N
         labelSpecialAttack.setText("Special Attack");
+        getContentPane().add(labelSpecialAttack, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, -1, -1));
 
+        button1.setBackground(new java.awt.Color(0, 66, 0));
+        button1.setFont(new java.awt.Font("Papyrus", 1, 13)); // NOI18N
+        button1.setForeground(new java.awt.Color(255, 255, 255));
         button1.setLabel("Return");
         button1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button1ActionPerformed(evt);
             }
         });
+        getContentPane().add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 250, -1, -1));
 
+        btnRestore.setBackground(new java.awt.Color(0, 66, 0));
+        btnRestore.setFont(new java.awt.Font("Papyrus", 1, 13)); // NOI18N
+        btnRestore.setForeground(new java.awt.Color(255, 255, 255));
         btnRestore.setLabel("Restore");
         btnRestore.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRestoreActionPerformed(evt);
             }
         });
+        getContentPane().add(btnRestore, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(75, 75, 75)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(labelSx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(labelAttack_b, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(labelSpecialAttack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(labelJump, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(103, 103, 103)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(textJump, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(textBasicAttack, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(textSpecialAttack, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(textSx, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(textDx, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(10, 10, 10))
-                            .addComponent(btnRestore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(labelDx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelJump, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(textJump, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelDx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textDx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(34, 34, 34)
-                                .addComponent(textBasicAttack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)
-                                .addComponent(textSpecialAttack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(labelSx, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textSx, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(14, 14, 14)
-                                        .addComponent(labelAttack_b, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(44, 44, 44)
-                                        .addComponent(labelSpecialAttack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRestore, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/bg.png"))); // NOI18N
+        jLabel1.setPreferredSize(new java.awt.Dimension(408, 321));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -344,6 +306,7 @@ public class guiCommand extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button btnRestore;
     private java.awt.Button button1;
+    private javax.swing.JLabel jLabel1;
     private java.awt.Label labelAttack_b;
     private java.awt.Label labelDx;
     private java.awt.Label labelJump;

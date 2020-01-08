@@ -13,10 +13,11 @@ import java.util.Map;
 import javax.imageio.*;
 
 /**
- *
- * @author ludovicorusso
+ *This class manages the Main Character Sprites.
+ * @author Crazy Monkey Software
  */
 public class MainCharacterSprite {
+    
     private ArrayList<BufferedImage[]> sprites;
     private Map<Enum,BufferedImage[]> sprite2;
     private final int[] numFrames = {2, 4, 4, 3, 4, 3, 4, 3};

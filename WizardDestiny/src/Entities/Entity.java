@@ -8,8 +8,10 @@ package Entities;
 import java.awt.Rectangle;
 
 /**
- *
- * @author Jonathan De Maio <j.demaio1@studenti.unisa.it>
+ * This Class represents the common interface and codes of all entities
+ * involved inside of the game environment.
+ * 
+ * @author Crazy Monkey Software
  */
 public abstract class Entity {
     
@@ -162,10 +164,21 @@ public abstract class Entity {
         this.posY = y;
     }
     
+    /**
+     * It returns a Rectangle object obtained 
+     * by using the Entity coordinates and dimensions.
+     * 
+     * @return Rectangle
+     */
     public Rectangle getBounds() {
         return new Rectangle(this.posX, this.posY, this.getHeight(), this.getWidth());
     }
     
+    /**
+     * It updates the position of the X axis by a given integer.
+     * 
+     * @param delta integer scrolling variation
+     */
     public void scrollingPosX(int delta){
         this.setPosX(this.getPosX() - delta);
     }

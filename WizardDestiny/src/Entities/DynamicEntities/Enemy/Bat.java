@@ -8,14 +8,16 @@ package Entities.DynamicEntities.Enemy;
 import Entities.DynamicEntities.Enemy.MovementStrategy.BatMovementStrategy;
 
 /**
- *
- * @author letga
+ *This class represents the Dynamic Entity Enemy Bat.
+ * @author Crazy Monkey Software House
  */
 public class Bat extends Enemy{
     
-    private boolean backward;
+    /*Movement range bounds on axys X.*/
     private int rightBound;
     private int leftBound;
+    
+    /*Movement range bounds on axys Y.*/
     private int upBound;
     private int bottomBound;
     
@@ -32,18 +34,34 @@ public class Bat extends Enemy{
         bottomBound = posY + 25;
     }
     
+    /**
+     * It returns the right bound on axis X.
+     * @return int
+     */
     public int getRightBound() {
         return rightBound;
     }
 
+    /**
+     * It returns the left bound on axis X.
+     * @return int
+     */
     public int getLeftBound() {
         return leftBound;
     }
 
+    /**
+     * It returns the up bound on axis Y.
+     * @return int
+     */
     public int getUpBound() {
         return upBound;
     }
 
+    /**
+     * It returns the bottom bound on axis Y.
+     * @return int
+     */
     public int getBottomBound() {
         return bottomBound;
     }

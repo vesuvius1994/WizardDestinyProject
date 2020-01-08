@@ -13,13 +13,21 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.*;
 
 /**
- *
- * @author ludovicorusso
+ *This class manages all gameplay sounds.
+ * @author Crazy Monkey Software House
  */
 public class Sound {
+    
+    /*Clip instance containing the background music.*/
     private Clip clip;
     
-   public void playClip(String path){
+    /**
+     * It reads from an audio stream an audio file from a given input path
+     * and uses it to instantiates a Clip object.
+     * Finally, it invokes the start method on the Clip object.
+     * @param path String pathname of an audio file.
+     */
+    public void playClip(String path){
         try {
             File fileSuono = new File(path);
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(fileSuono);
@@ -35,10 +43,18 @@ public class Sound {
         }
         clip.start();
    }
+   
+    /**
+     * It invokes the stop method on the Clip object.
+     */
    public void stopClip(){
        clip.stop();
    }
    
+   /**
+    * It invokes the loop method on the Clip object 
+    * in order to play it in loop.
+    */
    public void loop(){
        clip.loop(Clip.LOOP_CONTINUOUSLY);
    }

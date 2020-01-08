@@ -5,13 +5,7 @@
  */
 package Level;
 
-import Entities.DynamicEntities.Enemy;
-import Entities.DynamicEntities.Enemy.Werewolf;
-import Entities.Entity;
-import Entities.StaticEntities.Diamond;
 import Sprite.DiamondSprite;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 

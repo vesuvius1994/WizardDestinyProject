@@ -3,8 +3,8 @@ package Entities.DynamicEntities.Health;
 import java.awt.Graphics2D;
 
 /**
- *
- * @author Silvio Maria Amato
+ *This class represents the health system of Enemy Entity.
+ * @author Crazy Monkey Software House
  */
 public class EnemyHealth extends Health{
 

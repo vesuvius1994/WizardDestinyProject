@@ -23,18 +23,20 @@ import javax.swing.JPanel;
  *This class represents the general level of the game.
  * It extends the JPanel class in order to manage all representative
  * elements of the gameplay.
- * In addition, it also manages the update of level entities
- * and their interactions.
+ * In addition, it also manages the scrolling feature
+ * and the entities representations.
+ *
  * 
  * NOTE: Coupling with Builder must be implemented.
  * 
- * @author letga
+ * @author Crazy Monkey Software House
  */
 public class Level extends JPanel{
     
     /*Instance of the Class Main Character.*/
     protected MainCharacter mc;
     
+    /*Instance of the Class Score*/
     protected Score score;
     
     /*ArrayLists containing all entities of the current Level.*/
@@ -60,14 +62,23 @@ public class Level extends JPanel{
     protected MainCharacterSprite mcs;
     protected ArrayList<BufferedImage[]> sprite;
     
+    /*This variable identifies the Game Over event.*/
     protected boolean gameOver;
     
-    /*Class Level Constructor.
-    *It instantiates the background of the level,
-    *creates the entities map of the level
-    *and draws their relative tiles.
-    *Also, it instantiates the Main Character tiles manager.
-    **/
+    /**
+     * Class Level Constructor.
+     *It instantiates the background of the level,
+     *creates the entities map of the level
+     *and draws their relative tiles.
+     *Also, it instantiates the Main Character tiles manager.
+     * @param dynamicEntities ArrayList containing all level dynamic entities.
+     * @param staticEntities ArrayList containing all level static entities.
+     * @param dynamicTiles ArrayList containing all dynamic entities tiles.
+     * @param staticTiles ArrayList containing all static entities tiles.
+     * @param background Background object related to the level.
+     * @param levelEnd Integer representing the last pixel of the level.
+     */
+    
     public Level(ArrayList dynamicEntities, ArrayList staticEntities, 
             ArrayList dynamicTiles, ArrayList staticTiles, 
             Background background, int levelEnd){
@@ -101,9 +112,13 @@ public class Level extends JPanel{
         return this.mc;
     }
     
-    /*It draws all level tiles on the panel
-    *and invokes "collisionDetection" and "scrolling" methods.
-    *In addition, it draws Main Character sprite.*/
+    /**
+     *It draws all level tiles on the panel
+     *and invokes "scrolling" method.
+     *In addition, it draws Main Character sprite 
+     *and manages the Game over event.
+     * @param g It is used to draw elements on the Panel component.
+     */
     @Override
     public void paint(Graphics g){
         super.paint(g);
@@ -117,26 +132,27 @@ public class Level extends JPanel{
         drawTiles(g2d);
         drawSprite(g2d);
         drawAttacks(g2d);
-        if (mc.getHealth() <= 0) {
-            g2d.setFont(new Font("Papyrus", Font.BOLD, 80));
-            g2d.setColor(Color.white);
-            mc.setState(Entity.States.DEAD);
-            g2d.drawString("Game Over", 100, 230);
-            this.gameOver = true;
-        }
+        drawGameOver(g2d);
+        
         this.score.draw(g2d);
         
         Toolkit.getDefaultToolkit().sync();
     }
     
+    /**
+     * It returns the value of gameOver variable.
+     * @return gameOver
+     */
     public boolean isGameOver(){
         return this.gameOver;
     }
     
-    /*When it is invoked, it calls all updating position methods
-    *each time the Main Character position is going to be 
-    *greater than the HALF_PANEL value.
-    *Finally, the Main character position is setted to HALF_PANEL.*/
+    /**
+     *When it is invoked, it calls all updating position methods
+     *each time the Main Character position is going to be 
+     *greater than the HALF_PANEL value.
+     *Finally, the Main character position is setted to HALF_PANEL.
+     */
     protected void scrolling(){
         if(mc.getPosX() > HALF_PANEL && (levelEnd - scrolledPixels ) > (HALF_PANEL * 2)){
             dxEntity = 2;
@@ -151,7 +167,10 @@ public class Level extends JPanel{
         
     }
     
-    /*It updates all level entities position.*/
+    /**
+     * It updates all level entities position 
+     * by invoking their scrollingPosX method.
+     */
     protected void updateEntitiesPosition(){
         
         for(int i = 0; i < this.staticEntities.size(); i++){
@@ -165,12 +184,20 @@ public class Level extends JPanel{
         }
     }
     
+    /**
+     * This method draws Attack entities.
+     * @param g2d It is used to draw Attack Entities.
+     */
     protected void drawAttacks(Graphics2D g2d){
         for(Attack a : mc.getAttacks()){
             g2d.drawImage(a.getImg(),a.getPosX(),a.getPosY(),a.getWidth(),a.getHeight(),null);
         }
     }
     
+    /**
+     * This method draws Main Character sprites.
+     * @param g2d It is used to draw Attack Entities.
+     */
     protected void drawSprite(Graphics2D g2d){
         mc.drawHealth(g2d);
         mc.drawEnergy(g2d);
@@ -179,6 +206,10 @@ public class Level extends JPanel{
             g2d.drawImage(action[i],mc.getPosX(),mc.getPosY(),mc.getWidth(),mc.getHeight(),null);
     }
     
+    /**
+     * This method draws all tiles of level entities.
+     * @param g2d It is used to draw all entities tiles.
+     */
     protected void drawTiles(Graphics2D g2d){
         
         for(int i = 0; i < this.dynamicTiles.size(); i++){
@@ -196,19 +227,52 @@ public class Level extends JPanel{
         }
     }
     
+    /**
+     * It returns the instance of the ArrayList staticEntities.
+     * @return  ArrayList
+     */
     public ArrayList<Entity> getStaticEntities(){
         return this.staticEntities;
     }
     
+    /**
+     * It returns the instance of the ArrayList dynamicEntities.
+     * @return ArrayList
+     */
     public ArrayList<Entity> getDynamicEntities(){
         return this.dynamicEntities;
     }
     
+    /**
+     * It increments the value contained inside of the object Score.
+     * @param value integer value.
+     */
     public void incrementScore(int value){
         this.score.setScore(score.getScore() + value);
     }
     
+    /**
+     * It removes a tile from the ArrayList dynamicTiles.
+     * @param index integer
+     */
     public void removeTile(int index){
         this.dynamicTiles.remove(index);
+    }
+    
+    /**
+     * This method draws the Game Over notification 
+     * and reports the final player's score.
+     * @param g2d Graphics2D
+     */
+    protected void drawGameOver(Graphics2D g2d){
+        if (mc.getHealth() <= 0) {
+            g2d.setFont(new Font("Papyrus", Font.BOLD, 80));
+            g2d.setColor(Color.white);
+            mc.setState(Entity.States.DEAD);
+            g2d.drawString("Game Over", 100, 230);
+            g2d.setFont(new Font("Papyrus", Font.BOLD, 40));
+            g2d.drawString("Score :"+String.valueOf(this.score.getScore()), 250, 280);
+            this.gameOver = true;
+        }
     }
 }

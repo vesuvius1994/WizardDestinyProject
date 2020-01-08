@@ -10,13 +10,19 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 
 /**
- *
- * @author Jonathan De Maio <j.demaio1@studenti.unisa.it>
+ *This class contains the player's score information.
+ * @author Crazy Monkey Software House
  */
 public class Score {
 
-    protected int score = 0;
+    /*Current value of the player's score.*/
+    protected int score;
 
+    /**
+     * Score class constructor.
+     * It initializes the score variable with a given int input.
+     * @param score int
+     */
     public Score(int score) {
         this.score = score;
     }
@@ -40,6 +46,11 @@ public class Score {
     }
 
 
+    /**
+     * It draws the actual player's score value on a Componet
+     * by using a Graphics2D object.
+     * @param g2d Graphics2D
+     */
     public void draw(Graphics2D g2d) {
         g2d.setFont(new Font("Papyrus", Font.BOLD, 22));
         g2d.setColor(Color.white);
