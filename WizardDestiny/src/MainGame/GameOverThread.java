@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DirectorTest;
+package MainGame;
 
 import Commands.LevelManager;
 import Level.Level;
@@ -17,12 +17,12 @@ import GameSound.Sound;
  *
  * @author ludovicorusso
  */
-public class ThreadTest implements Runnable{
+public class GameOverThread implements Runnable{
     private Level level;
     private JFrame frame;
     private Director dir;
     private Sound sound;
-    public ThreadTest(Level level, JFrame frame,Sound sound) {
+    public GameOverThread(Level level, JFrame frame,Sound sound) {
         this.level = level;
         this.frame = frame;
         this.dir=new Director();

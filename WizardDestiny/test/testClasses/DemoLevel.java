@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Level;
+package testClasses;
 
+import Level.Background;
+import Level.Level;
 import Sprite.DiamondSprite;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;

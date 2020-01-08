@@ -5,8 +5,8 @@
  */
 package GameSound;
 
-import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -20,6 +20,7 @@ public class Sound {
     
     /*Clip instance containing the background music.*/
     private Clip clip;
+    private URL url;
     
     /**
      * It reads from an audio stream an audio file from a given input path
@@ -29,8 +30,8 @@ public class Sound {
      */
     public void playClip(String path){
         try {
-            File fileSuono = new File(path);
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(fileSuono);
+            url = getClass().getResource(path);
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(url);
             this.clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             audioInputStream.close();

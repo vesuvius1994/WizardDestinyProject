@@ -10,6 +10,7 @@ import javax.swing.Timer;
 
 import Entities.DynamicEntities.*;
 import Entities.DynamicEntities.Attacks.Attack;
+import Entities.DynamicEntities.Enemy.Boss;
 import Entities.DynamicEntities.Enemy.Enemy;
 import Entities.Entity;
 import Entities.StaticEntities.Block;
@@ -151,6 +152,11 @@ public class LevelManager implements ActionListener{
                         dynamicEntities.remove(i);
                         this.level.removeTile(i);
                         this.level.incrementScore(3);
+                        if(enemy instanceof Boss){
+                            this.level.setGameWin(true);
+                            this.level.incrementScore(100);
+                        }
+                        
                     }
                     else{
                         enemy.decreaseHealth(attack.getStrength());
@@ -204,7 +210,7 @@ public class LevelManager implements ActionListener{
                     mc.setPosY(block.getPosY() + block.getHeight() + 3);
                     mc.setDy(3);
                     mc.setState(Entity.States.FALLING);
-                    sound.playClip("src/Resources/SoundPack/sfx_impact.wav");
+                    sound.playClip("/Resources/SoundPack/sfx_impact.wav");
                     isFalling = true;
                     isJumping = false;
                 } else if(isWalkingRight &&
@@ -212,21 +218,21 @@ public class LevelManager implements ActionListener{
                     mc.setPosX(block.getPosX() - mc.getWidth());
                     mc.setDx(0);
                     isWalkingRight = false;
-                    sound.playClip("src/Resources/SoundPack/sfx_impact.wav");
+                    sound.playClip("/Resources/SoundPack/sfx_impact.wav");
                     mc.setState(Entity.States.IDLE);
                 } else if(isWalkingLeft &&
                         mc.getPosX() < (block.getPosX() + block.getWidth())){
                     mc.setPosX(block.getPosX() + block.getWidth());
                     mc.setDx(0);
                     isWalkingLeft = false;
-                    sound.playClip("src/Resources/SoundPack/sfx_impact.wav");
+                    sound.playClip("/Resources/SoundPack/sfx_impact.wav");
                     mc.setState(Entity.States.IDLE);
                 }
             } else if(staticEntities.get(i) instanceof Diamond && 
                     staticEntities.get(i).getBounds().intersects(mc.getBounds())){
                 this.level.incrementScore(5);
                 staticEntities.get(i).setPosX(-200);
-                sound.playClip("src/Resources/SoundPack/sfx_diamond.wav");
+                sound.playClip("/Resources/SoundPack/sfx_diamond.wav");
                 
             }
             
@@ -237,7 +243,7 @@ public class LevelManager implements ActionListener{
             
             if(enemy.getBounds().intersects(mc.getBounds())){
                 mc.decreaseHealth(1);
-                sound.playClip("src/Resources/SoundPack/sfx_impact.wav");
+                sound.playClip("/Resources/SoundPack/sfx_impact.wav");
                 if(isWalkingRight || isIdle ||
                         (isJumping &&
                          mc.getPosX() < enemy.getPosX() &&
@@ -285,17 +291,17 @@ public class LevelManager implements ActionListener{
                     isWalkingLeft = true;
                 } else if(key == mc.getCommand().getJump() && !isJumping && !isFalling){
                     new Thread(new JumpManagementThread()).start();
-                    sound.playClip("src/Resources/SoundPack/sfx_movement_jump.wav");
+                    sound.playClip("/Resources/SoundPack/sfx_movement_jump.wav");
                 } else if(!isAttacking && key == mc.getCommand().getAttackB()){
                     isAttacking = true;
                     mc.setState(Entity.States.ATTACKING);
                     mc.attack();
-                    sound.playClip("src/Resources/SoundPack/sfx_basicattack.wav");
+                    sound.playClip("/Resources/SoundPack/sfx_basicattack.wav");
                 } else if(!isAttacking && key == mc.getCommand().getAttackS()){
                     isAttacking = true;
                     mc.setState(Entity.States.S_ATTACKING);
                     mc.specialAttack();
-                    sound.playClip("src/Resources/SoundPack/sfx_specialattack.wav");
+                    sound.playClip("/Resources/SoundPack/sfx_specialattack.wav");
                 }
               }else{
                   timer.stop();
@@ -345,7 +351,7 @@ public class LevelManager implements ActionListener{
                 Thread.sleep(jumpingTime);
                 isJumping = false;
                 mc.setState(Entity.States.IDLE);
-                sound.playClip("src/Resources/SoundPack/sfx_movement_jump_landing.wav");
+                sound.playClip("/Resources/SoundPack/sfx_movement_jump_landing.wav");
             }catch(InterruptedException e){
                 System.exit(0);
             }

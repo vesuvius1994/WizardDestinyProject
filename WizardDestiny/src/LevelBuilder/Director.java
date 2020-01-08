@@ -26,6 +26,7 @@ public class Director {
     private WerewolfFactory werewolfFactory;
     private BatFactory batFactory;
     private SpiderFactory spiderFactory;
+    private BossFactory bossFactory;
     
     /*Objects Factories*/
     private BlockFactory blockFactory;
@@ -51,12 +52,14 @@ public class Director {
     protected BufferedImage tileset;
     protected BufferedImage[][] tiles;
     protected final int tileSize = 30;
+    protected BufferedImage bossTile;
     
     /*Strings containing the pathname of files ".map"
     *and ".png", respectively*/
     protected String mapLevelPath;
     protected String tileMatrixPath;
     protected String backgroundPath;
+    protected String bossTilePath;
     
     protected LevelBuilder builder;
     
@@ -66,17 +69,28 @@ public class Director {
         this.mapLevelPath = "/Resources/level_1.map";
         this.backgroundPath = "/Resources/bg_double.png";
         this.tileMatrixPath = "/Resources/tileMap.png";
+        this.bossTilePath = "/Resources/dragon_LEFT.png";
         
         this.batFactory = new BatFactory();
         this.spiderFactory = new SpiderFactory();
         this.werewolfFactory = new WerewolfFactory();
+        this.bossFactory = new BossFactory();
         
         this.blockFactory = new BlockFactory();
         this.diamondFactory = new DiamondFactory();
         
+        this.loadBossTile();
         this.loadMap(this.mapLevelPath);
         this.loadTile(this.tileMatrixPath);
         this.createLevel();
+    }
+    
+    public void loadBossTile(){
+        try {
+            this.bossTile = ImageIO.read(getClass().getResourceAsStream(this.bossTilePath));
+        } catch (IOException e) {
+            System.out.println("sto in errore");
+        }
     }
     
     /*It takes the pathname of a file ".map" as input
@@ -156,6 +170,9 @@ public class Director {
                     this.builder.buildEnemy(this.spiderFactory, x, y, tiles[r][c]);
                 } else if(r == 1 && c == 4){
                     this.builder.buildObject(this.diamondFactory, x, y, tiles[r][c]);
+                } else if(rc == 20){
+                    System.out.println("entro");
+                    this.builder.buildEnemy(bossFactory, x, y, this.bossTile);
                 } else if(c != 5){
                     this.builder.buildObject(blockFactory, x, y, tiles[r][c]);
                 }

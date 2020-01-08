@@ -65,6 +65,8 @@ public class Level extends JPanel{
     /*This variable identifies the Game Over event.*/
     protected boolean gameOver;
     
+    protected boolean gameWin;
+    
     /**
      * Class Level Constructor.
      *It instantiates the background of the level,
@@ -102,6 +104,8 @@ public class Level extends JPanel{
         this.levelEnd = levelEnd;
         
         this.gameOver = false;
+        
+        this.gameWin = false;
     }
     
     /**
@@ -265,14 +269,26 @@ public class Level extends JPanel{
      * @param g2d Graphics2D
      */
     protected void drawGameOver(Graphics2D g2d){
-        if (mc.getHealth() <= 0) {
+        if (mc.getHealth() <= 0 || this.gameWin) {
             g2d.setFont(new Font("Papyrus", Font.BOLD, 80));
             g2d.setColor(Color.white);
             mc.setState(Entity.States.DEAD);
-            g2d.drawString("Game Over", 100, 230);
+            if(!gameWin)
+                g2d.drawString("Game Over", 100, 230);
+            else
+                g2d.drawString("You Win!", 100, 230);
             g2d.setFont(new Font("Papyrus", Font.BOLD, 40));
             g2d.drawString("Score :"+String.valueOf(this.score.getScore()), 250, 280);
             this.gameOver = true;
         }
     }
+
+    /**
+     * 
+     * @param gameWin 
+     */
+    public void setGameWin(boolean gameWin) {
+        this.gameWin = gameWin;
+    }
+    
 }

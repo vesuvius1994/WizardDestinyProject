@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DirectorTest;
+package MainGame;
 
 import Commands.LevelManager;
 import Level.Level;
@@ -37,9 +37,9 @@ public class Main extends Thread{
         LevelManager mng = new LevelManager(level);
         mng.startListener();
         Sound sound=new Sound();
-        sound.playClip("src/Resources/SoundPack/sfx_gameloop.wav");
+        sound.playClip("/Resources/SoundPack/sfx_gameloop.wav");
         sound.loop();
-        Thread test = new Thread(new ThreadTest(level,testFrame,sound));
+        Thread test = new Thread(new GameOverThread(level,testFrame,sound));
         test.start();
         
         

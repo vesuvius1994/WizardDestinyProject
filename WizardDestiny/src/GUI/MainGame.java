@@ -5,7 +5,7 @@
  */
 package GUI;
 
-import DirectorTest.Main;
+import MainGame.Main;
 import GameSound.Sound;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -131,11 +131,11 @@ public class MainGame extends javax.swing.JFrame {
 
        if(evt.getKeyCode()==KeyEvent.VK_UP){
            JButtonExit.requestFocus();
-           sound.playClip("src/Resources/SoundPack/sfx_sounds_button3.wav");
+           sound.playClip("/Resources/SoundPack/sfx_sounds_button3.wav");
        }
         if(evt.getKeyCode()==KeyEvent.VK_DOWN){
            jButtonSetting.requestFocus();
-           sound.playClip("src/Resources/SoundPack/sfx_sounds_button2.wav");
+           sound.playClip("/Resources/SoundPack/sfx_sounds_button2.wav");
        }
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
            try {
@@ -144,7 +144,7 @@ public class MainGame extends javax.swing.JFrame {
                Logger.getLogger(MainGame.class.getName()).log(Level.SEVERE, null, ex);
            }
                this.setVisible(false);
-               sound.playClip("src/Resources/SoundPack/sfx_menu_select1.wav");
+               sound.playClip("/Resources/SoundPack/sfx_menu_select1.wav");
         }
     }//GEN-LAST:event_jButtonStartKeyPressed
 
@@ -152,16 +152,16 @@ public class MainGame extends javax.swing.JFrame {
 
         if(evt.getKeyCode()==KeyEvent.VK_UP){
            jButtonStart.requestFocus();
-           sound.playClip("src/Resources/SoundPack/sfx_sounds_button1.wav");
+           sound.playClip("/Resources/SoundPack/sfx_sounds_button1.wav");
        }
         if(evt.getKeyCode()==KeyEvent.VK_DOWN){
            JButtonExit.requestFocus();
-           sound.playClip("src/Resources/SoundPack/sfx_sounds_button3.wav");
+           sound.playClip("/Resources/SoundPack/sfx_sounds_button3.wav");
        }
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             guiCommand.main(null);
             this.setVisible(false);
-            sound.playClip("src/Resources/SoundPack/sfx_menu_select2.wav");
+            sound.playClip("/Resources/SoundPack/sfx_menu_select2.wav");
         }
     }//GEN-LAST:event_jButtonSettingKeyPressed
 
@@ -169,15 +169,15 @@ public class MainGame extends javax.swing.JFrame {
   
         if(evt.getKeyCode()==KeyEvent.VK_UP){
            jButtonSetting.requestFocus();
-           sound.playClip("src/Resources/SoundPack/sfx_sounds_button2.wav");
+           sound.playClip("/Resources/SoundPack/sfx_sounds_button2.wav");
        }
         if(evt.getKeyCode()==KeyEvent.VK_DOWN){
            jButtonStart.requestFocus();
-           sound.playClip("src/Resources/SoundPack/sfx_sounds_button3.wav");
+           sound.playClip("/Resources/SoundPack/sfx_sounds_button3.wav");
        }
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             System.exit(0);
-            sound.playClip("src/Resources/SoundPack/sfx_menu_select3.wav");
+            sound.playClip("/Resources/SoundPack/sfx_menu_select3.wav");
         }
     }//GEN-LAST:event_JButtonExitKeyPressed
 
