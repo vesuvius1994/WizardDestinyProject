@@ -1,0 +1,26 @@
+Third Sprint Planning
+(December 21, 2019 to January 8, 2020)
+
+Roles:
+Scrum Master - Michele Barbella
+Product Owner - Jonathan De Maio
+
+Sprint Goal: This sprint goal concerns about delivering a playable game version by sprint deadline. This can be done by completing the undone functionalities of the enemy items that were left in the previous sprint. Then, implementing new types of basic enemy to enrich the gameplay. Moreover, delivering a final boss with an extended life with respect to the basic ones. Enriching game design by developing an extended map. Finally, adding sound effects and background music.
+
+Product Backlog items chosen for the upcoming Sprint, whose duration is two weeks (we didn’t consider Christmas-holidays week as working days):
+- As a player of the game I want enemies to move autonomously in a fixed range so that they can deal damage to main character.
+- As a player of the game I want enemies to have health system so they can be defeated by main character attacks.
+- As a player of the game, I want special attack based on energy consumption, so that it can’t be used too frequently.
+- As a player of the game, I can fight a final boss enemy, so that I have more exciting challenge.
+- In order to avoid repetitive pieces of experience, I want enemies to have different design and behaviors. 
+- As a player of the game, I fully want to control audio settings, so that I can enhance background music or remove game sounds in case I consider them annoying.
+
+Considering again a workload of 12 hours/week per person and a story-point value represents 2 hours of work per day by a single development team member, the amount of story-points assigned to each chosen product backlog item will be as follows:
+- (SP:3) As a player of the game I want enemies to move autonomously in a fixed range so that they can deal damage to main character.
+- (SP:3) As a player of the game I want enemies to have health system so they can be defeated by main character attacks.
+- (SP:1) As a player of the game, I want special attack based on energy consumption, so that it can’t be used too frequently.
+- (SP:8) As a player of the game, I can fight a final boss enemy, so that I have more exciting challenge.
+- (SP:2) In order to avoid repetitive pieces of experience, I want enemies to have different design and behaviors. 
+- (SP:3) As a player of the game, I fully want to control audio settings, so that I can enhance background music or remove game sounds in case I consider them annoying.
+
+The workload will be divided among components of the team, frequently working in pairs to check the code visually. If a part of the task is considered “Done”, it will be uploaded on a shared repository and integrated with the entire system.

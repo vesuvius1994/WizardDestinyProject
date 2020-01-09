@@ -1,0 +1,39 @@
+Agile Practice Record
+
+SCRUM Roles
+The principal roles were changed for every sprint:
+- (First Sprint) Scrum Master - Gaetano Lettieri, Product Owner - Gaetano Maffucci
+- (Second Sprint) Scrum Master - Silvio Maria Amato, Product Owner - Claudio Pepe
+- (Third Sprint) Scrum Master - Michele Barbella, Product Owner - Jonathan De Maio
+
+Product Backlog
+The product owner together with the team members decided how to obtain from the basic initial idea of the game a series of user stories (tasks).
+
+Planning Poker (SCRUM Poker)
+Unanimously deciding the number of story points per task, first voting then deciding what could be the better estimation all together.
+
+Sprint Planning
+The whole team, guided by the SCRUM Master, decided the user stories to develop in the planned sprint, taking into account the priority established by the product owner.
+
+Daily SCRUM Meetings
+Day by day, before starting to work, a stand-up meeting was performed, even via Skype and Discord when needed (when all the members of the group weren’t available in a single place), underlining, for each member, what was implemented in the previous day, the problems encountered during the work-day and what the member expects to do in that day.
+
+Sprint Task Board (Trello)
+Trello (a virtual Task Board) was used to keep tracking of the work (i.e., items, tasks) that the team members were performing during the sprint and was used to help the team during the daily meetings.
+
+Sprint Review
+At  the end of each sprint, the SCRUM Team met up to discuss about the Product obtained from the just finished iteration. Thus, it was possible to adjust the Product Backlog items estimation by considering the progress of that last Sprint. Finally, the Product Backlog was revisited, therefore it was possible to understand whether some changes were necessary or not.
+
+Sprint Retrospective
+At the end of every sprint the team produced a starfish diagram which illustrates the issues encountered, what behaviour must be ended and what are the good things done. From this diagram we extrapolated a Retrospective Report, indicating, as in the starfish diagram, the Main Problem, the Good Aspects and the Future improvements. 
+
+
+Continuous Design
+During the Project development, the architecture was adapted to the incrementing necessities of the Product. Thus, it continuously reflected the state of Project itself.
+
+Pair Programming
+We applied the Pair-Programming technique to ensure better quality of the code and maintain the number of bugs per line of code low. We changed the paired programmers when needed to have a balanced workload for all the group and permit to all the team members to be able to have the knowledge of the entire project.
+
+Test-Driven Development
+After a task was implemented, it was subsequently tested inside of a safe environment yet inside of the actual system. If all tests yielded  positive responses, the task is finally marked Done.
+

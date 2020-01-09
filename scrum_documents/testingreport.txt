@@ -1,0 +1,5 @@
+Testing Report
+
+The Done definition of the Team defines a task as completed when it was implemented, tested inside of a safe environment yet tested inside of the actual system. If all tests yielded positive responses, the task is finally marked Done.
+Specifically, the safe environment testing means that the functionality is tested inside of a specific package where there are particular code blocks which simulate the behavior of part of system in which the functionality must be integrated. We use this kind of approach in order to have almost a fully control of the testing subject. However, this kind of test was led as a white box one. Moreover, it granted us to make all needed changes without affecting the already Done Product. Moreover, the task passes the test if the result obtained inside of the safe environment yield the expected output and behavior for all the cases supposed.
+Finally, the integration tests consist in adding to the current product the new feature (task) and ensuring that the system acts as expected, if it does the task is defined as Done and committed to the official repository.

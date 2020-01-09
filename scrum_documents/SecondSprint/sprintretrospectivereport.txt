@@ -1,0 +1,10 @@
+Sprint Retrospective Report
+
+Main problems
+The main problem of this sprint was the integration among several blocks of the project, developed by different members of the team, due to the scarcely communication on the approaches and the adopted design patterns. Another issue was useless discussions on some arguments that were already cleared and defined, but one team member was thinking at the solution and explaining it in a different way from another.
+
+Good aspects
+We improved the existing code making some refactoring on it and applying the design patterns that seemed to fit better. The use of git (GitHub) was increased, making use of it to store the working and tested code. We continued the use of pair programming technique, which resulted in the decreasing of errors and bugs, thanks to the instant control (testing) of the written code.
+
+Future Improvements
+Improve the use of GitHub to share the code between team members, using different branches of the repository. It's useful for future to apply a pair-programming rotation among project members because each one will be able to give a simple answer to the implementation problems which he is good at. Another important aspect is to keep doing code refactoring in order to avoid confusion in the classes’ hierarchy and proliferation of possible bugs which haven’t been detected yet.

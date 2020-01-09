@@ -1,0 +1,7 @@
+Sprint Retrospective Report
+
+Main problems
+The main problem in this third sprint was a little lack of confrontation due to the holidays.
+
+Good aspects
+We were able to complete all tasks left undone from the previous sprint and integrate all others planned features. The use of GitHub and all other tools reached a good level of knowledge. A perfect usage of pair-programming with the rotation of the members.
