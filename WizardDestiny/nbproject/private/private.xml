@@ -3,9 +3,26 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/letga/Documents/GitHub/WizardDestinyProject/WizardDestiny/src/Commands/SourceCommand.java</file>
+            <file>file:/C:/Users/letga/Documents/GitHub/WizardDestinyProject/WizardDestiny/src/GameSound/Sound.java</file>
+            <file>file:/C:/Users/letga/Documents/GitHub/WizardDestinyProject/WizardDestiny/src/Entities/DynamicEntities/DynamicEntity.java</file>
+            <file>file:/C:/Users/letga/Documents/GitHub/WizardDestinyProject/WizardDestiny/src/LevelBuilder/LevelBuilder.java</file>
+            <file>file:/C:/Users/letga/Documents/GitHub/WizardDestinyProject/WizardDestiny/test/testClasses/CommandsListenerTest/Main.java</file>
+            <file>file:/C:/Users/letga/Documents/GitHub/WizardDestinyProject/WizardDestiny/src/LevelBuilder/Director.java</file>
+            <file>file:/C:/Users/letga/Documents/GitHub/WizardDestinyProject/WizardDestiny/test/testClasses/BuilderTester/Main.java</file>
+            <file>file:/C:/Users/letga/Documents/GitHub/WizardDestinyProject/WizardDestiny/src/MainGame/GameOverThread.java</file>
+            <file>file:/C:/Users/letga/Documents/GitHub/WizardDestinyProject/WizardDestiny/src/Entities/DynamicEntities/Attacks/Attack.java</file>
+            <file>file:/C:/Users/letga/Documents/GitHub/WizardDestinyProject/WizardDestiny/src/LevelBuilder/ConcreteLevelBuilder.java</file>
             <file>file:/C:/Users/letga/Documents/GitHub/WizardDestinyProject/WizardDestiny/src/GUI/guiCommand.java</file>
             <file>file:/C:/Users/letga/Documents/GitHub/WizardDestinyProject/WizardDestiny/src/GUI/MainGame.java</file>
+            <file>file:/C:/Users/letga/Documents/GitHub/WizardDestinyProject/WizardDestiny/test/testClasses/DemoLevel.java</file>
+            <file>file:/C:/Users/letga/Documents/GitHub/WizardDestinyProject/WizardDestiny/test/testClasses/ObjectTestEnvironment/ObjectPainter.java</file>
+            <file>file:/C:/Users/letga/Documents/GitHub/WizardDestinyProject/WizardDestiny/src/MainGame/Main.java</file>
+            <file>file:/C:/Users/letga/Documents/GitHub/WizardDestinyProject/WizardDestiny/src/Commands/SourceCommand.java</file>
+            <file>file:/C:/Users/letga/Documents/GitHub/WizardDestinyProject/WizardDestiny/src/Entities/DynamicEntities/Health/Health.java</file>
+            <file>file:/C:/Users/letga/Documents/GitHub/WizardDestinyProject/WizardDestiny/src/Sprite/MainCharacterSprite.java</file>
+            <file>file:/C:/Users/letga/Documents/GitHub/WizardDestinyProject/WizardDestiny/src/Commands/LevelManager.java</file>
+            <file>file:/C:/Users/letga/Documents/GitHub/WizardDestinyProject/WizardDestiny/src/Entities/DynamicEntities/Enemy/Enemy.java</file>
+            <file>file:/C:/Users/letga/Documents/GitHub/WizardDestinyProject/WizardDestiny/src/Level/Level.java</file>
         </group>
     </open-files>
 </project-private>

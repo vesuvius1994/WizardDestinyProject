@@ -27,7 +27,7 @@ public class Main extends Thread{
             
         }while(level == null);
         
-        JFrame testFrame = new JFrame("Builder and Level Test");
+        JFrame testFrame = new JFrame("Wizard Destiny");
         testFrame.setSize(630, 508);
 	testFrame.setVisible(true);
         testFrame.setResizable(false);

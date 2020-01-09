@@ -1,0 +1,24 @@
+First Sprint Planning
+(November 29, 2019 to December 11, 2019)
+
+Roles:
+Scrum Master - Gaetano Lettieri
+Product Owner - Gaetano Maffucci
+
+Sprint Goal: creating the Main Character and enable him to move and jump inside a scrolling environment. Moreover, the Main Character should be able to make basic attack. About environment, it will scrolls in the opposite direction of the Main Character’s direction.
+
+Product Backlog items chosen for the upcoming Sprint, whose duration is two weeks:
+General Spike
+- In order to re-create a 2D retro platform game ambience, as a retro game player, I want the game to have a game environment
+- In order to re-create a 2D retro platform game ambience, as retro game player, I want the game to have a scrolling environment.
+- As a player of the game, i want the Main Character , so that it’s possible to play.
+- As a player of the game, I want the Main Character to be able to move and jump, so that the player has the opportunity to explore the surrounding area in all directions.
+
+Considering a workload of 12 hours/week per person and a story-point value represents 2 hours of work per day by a single development team member, the amount of story-points assigned to each chosen Product backlog items will be as follows:
+- (SP:5) General Spike.
+- (SP:8) In order to re-create a 2D retro platform game ambience, as a retro game player, I want the game to have a game environment.
+- (SP:5) In order to re-create a 2D retro platform game ambience, as retro game player, I want the game to have a scrolling environment.
+- (SP:5) As a player of the game, i want the Main Character , so that it’s possible to play. 
+- (SP:8) As a player of the game, I want the Main Character to be able to move and jump, so that the player has the opportunity to explore the surrounding area in all directions.
+
+The workload will be divided among components of the team. If a part of the task is considered “Done”, it will be uploaded on a shared repository and integrated with the entire system.

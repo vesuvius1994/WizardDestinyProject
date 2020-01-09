@@ -1,0 +1,30 @@
+Second Sprint Planning
+(December 12, 2019 to December 19, 2019)
+
+Roles:
+Scrum Master - Silvio Maria Amato
+Product Owner - Claudio Pepe
+
+Sprint Goal: Populate the environment with different objects and enemies, make the main character able to interact with them (collisions) and implement a health system and a score system. Moreover implement a menu able to start the game and to tune settings.
+
+Product Backlog items chosen for the upcoming Sprint, whose duration is one weeks:
+- As a player of the game, I want to perform a basic weak attack, so that I can use it frequently. 
+- As a player of the game I want enemies to have a specific appearance so that this enriches the game design.
+- As a player of the game I want enemies to move autonomously in a fixed range so that they can deal damage to main character.
+- As a player of the game I want enemies to have health system so they can be defeated by main character attacks.
+- In order to avoid frustrating experience, as a player of action games, I want Main Character to have a health system.
+- In order to make the player be able to achieve high scores, as a player of the game, I want to collect objects like coins.
+- In order to obtain a simple and immediate "start menu", as a player of the game, I want it to contain only three fundamental choice as "start the game","game settings" and "quit the game".
+- As PC gamer, I want to be able to map keyboard command inputs, so I can play the game with keys which I personally find comfortable.
+
+Considering again a workload of 12 hours/week per person and a story-point value represents 2 hours of work per day by a single development team member, the amount of story-points assigned to each chosen product backlog item will be as follows:
+- (SP:5) As a player of the game, I want to perform a basic weak attack, so that I can use it frequently. 
+- (SP:2) As a player of the game I want enemies to have a specific appearance so that this enriches the game design.
+- (SP:3) As a player of the game I want enemies to move autonomously in a fixed range so that they can deal damage to main character.
+- (SP:3) As a player of the game I want enemies to have health system so they can be defeated by main character attacks.
+- (SP:2) In order to avoid frustrating experience, as a player of action games, I want Main Character to have a health system.
+- (SP:2) In order to make the player be able to achieve high scores, as a player of the game, I want to collect objects like coins.
+- (SP:8) In order to obtain a simple and immediate "start menu", as a player of the game, I want it to contain only three fundamental choice as "start the game","game settings" and "quit the game".
+- (SP:1) As PC gamer, I want to be able to map keyboard command inputs, so I can play the game with keys which I personally find comfortable.
+
+The workload will be divided among components of the team, frequently working in pairs to check the code visually. If a part of the task is considered “Done”, it will be uploaded on a shared repository and integrated with the entire system.

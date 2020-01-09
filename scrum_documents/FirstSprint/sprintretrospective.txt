@@ -1,0 +1,10 @@
+First Sprint Retrospective Report
+
+Main problems
+Lack of communication due to inexperience and unknowledge of how to approach a game project and development. Hence, the creation of the game architecture resulted challenging.
+
+Good aspects
+The result of the spike solution led us to produce a good architecture able to represent the solution to our problem.
+
+Future Improvements
+As we now have clearer view of the problem and communication problems are known, the workload can be managed more efficiently among all team members.
