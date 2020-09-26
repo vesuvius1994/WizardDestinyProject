@@ -3,9 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/letga/Documents/GitHub/WizardDestinyProject/WizardDestiny/src/Commands/SourceCommand.java</file>
-            <file>file:/C:/Users/letga/Documents/GitHub/WizardDestinyProject/WizardDestiny/src/GUI/guiCommand.java</file>
-            <file>file:/C:/Users/letga/Documents/GitHub/WizardDestinyProject/WizardDestiny/src/GUI/MainGame.java</file>
+            <file>file:/Users/ludovicorusso/Desktop/Git/WizardDestinyProject/WizardDestiny/src/LevelBuilder/ConcreteLevelBuilder.java</file>
+            <file>file:/Users/ludovicorusso/Desktop/Git/WizardDestinyProject/WizardDestiny/src/GUI/MainGame.java</file>
+            <file>file:/Users/ludovicorusso/Desktop/Git/WizardDestinyProject/WizardDestiny/src/Sprite/MainCharacterSprite.java</file>
         </group>
     </open-files>
 </project-private>
